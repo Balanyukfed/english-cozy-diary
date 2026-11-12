@@ -1,0 +1,57 @@
+{
+  "id": "S3",
+  "title": "to be: отрицание + вопросы",
+  "date": "",
+  "status": "current",
+  "sheets": [
+    {
+      "id": "s3-cover",
+      "type": "cover",
+      "title": "Урок S3",
+      "body": "После am/is/are — отрицания и вопросы: I'm not… / Is she…? / Where are you?\nОткроем после ДЗ по S2.",
+      "pencilNotes": ["Сначала добей лист ДЗ в S2."]
+    },
+    {
+      "id": "s3-review",
+      "type": "review",
+      "title": "Повтор S2 + предлоги",
+      "body": "Короткий повтор am/is/are и in/on/at — полные упражнения на живом уроке.",
+      "exercises": [
+        {
+          "id": "s3-r1",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "She ___ in the lobby.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "is",
+          "explain": "She → is. in the lobby."
+        }
+      ]
+    },
+    {
+      "id": "s3-explain",
+      "type": "explain",
+      "title": "Черновик: not / вопросы",
+      "body": "Схема появится на уроке: I am not / she isn't / are you…?",
+      "schema": {
+        "caption": "Набросок",
+        "headers": ["Утверждение", "Отрицание", "Вопрос"],
+        "rows": [
+          ["I am ready", "I am not ready", "Are you ready?"],
+          ["She is here", "She is not / isn't here", "Is she here?"],
+          ["They are late", "They are not / aren't late", "Are they late?"]
+        ]
+      },
+      "pencilNotes": ["Полный урок — после «дз сделал» по S2."]
+    },
+    {
+      "id": "s3-hw",
+      "type": "hw",
+      "title": "ДЗ",
+      "body": "Появится после урока S3.",
+      "pencilNotes": ["Пока ДЗ — в тетради S2, последний лист."]
+    }
+  ]
+}

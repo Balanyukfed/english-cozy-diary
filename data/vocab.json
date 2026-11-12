@@ -1,0 +1,180 @@
+{
+  "decks": [
+    {
+      "id": "deck0",
+      "title": "Фразы",
+      "cards": [
+        {
+          "id": "v1",
+          "en": "I want a ticket",
+          "ru": "Я хочу билет",
+          "example": "I want a ticket to Bangkok.",
+          "group": "Фразы"
+        },
+        {
+          "id": "v2",
+          "en": "She goes to the airport",
+          "ru": "Она едет в аэропорт",
+          "example": "She goes to the airport at 8.",
+          "warn": true,
+          "group": "Фразы"
+        },
+        {
+          "id": "v3",
+          "en": "He wants help",
+          "ru": "Он хочет помощи",
+          "example": "He wants help with the bag.",
+          "warn": true,
+          "group": "Фразы"
+        },
+        {
+          "id": "v4",
+          "en": "I like Thailand",
+          "ru": "Мне нравится Таиланд",
+          "example": "I like Thailand a lot.",
+          "warn": true,
+          "group": "Фразы"
+        },
+        {
+          "id": "v5",
+          "en": "We have a flight",
+          "ru": "У нас есть рейс",
+          "example": "We have a flight at 10.",
+          "group": "Фразы"
+        },
+        {
+          "id": "v14",
+          "en": "She has a ticket",
+          "ru": "У неё есть билет",
+          "example": "She has a ticket for the flight.",
+          "warn": true,
+          "group": "Фразы"
+        },
+        {
+          "id": "v8",
+          "en": "some food",
+          "ru": "немного еды",
+          "example": "She wants some food.",
+          "group": "Фразы"
+        },
+        {
+          "id": "v9",
+          "en": "to the airport",
+          "ru": "в аэропорт",
+          "example": "I go to the airport.",
+          "warn": true,
+          "group": "Фразы"
+        }
+      ]
+    },
+    {
+      "id": "deck-airport",
+      "title": "Аэропорт",
+      "cards": [
+        {
+          "id": "v6",
+          "en": "luggage",
+          "ru": "багаж",
+          "example": "They need luggage tags.",
+          "warn": true,
+          "group": "Аэропорт"
+        },
+        {
+          "id": "v10",
+          "en": "passport",
+          "ru": "паспорт",
+          "example": "I need my passport.",
+          "group": "Аэропорт"
+        },
+        {
+          "id": "v11",
+          "en": "boarding pass",
+          "ru": "посадочный",
+          "example": "Where is my boarding pass?",
+          "group": "Аэропорт"
+        },
+        {
+          "id": "v12",
+          "en": "gate",
+          "ru": "выход на посадку",
+          "example": "The gate is number 12.",
+          "group": "Аэропорт"
+        },
+        {
+          "id": "v13",
+          "en": "suitcase",
+          "ru": "чемодан",
+          "example": "I have one suitcase.",
+          "group": "Аэропорт"
+        }
+      ]
+    },
+    {
+      "id": "deck-place",
+      "title": "Места",
+      "cards": [
+        {
+          "id": "v7",
+          "en": "beach",
+          "ru": "пляж",
+          "example": "She goes to the beach.",
+          "warn": true,
+          "group": "Места"
+        },
+        {
+          "id": "v15",
+          "en": "in the lobby",
+          "ru": "в лобби",
+          "example": "She is in the lobby.",
+          "warn": true,
+          "group": "Места"
+        },
+        {
+          "id": "v16",
+          "en": "at the market",
+          "ru": "на рынке",
+          "example": "They are at the market.",
+          "warn": true,
+          "group": "Места"
+        },
+        {
+          "id": "v17",
+          "en": "at the reception",
+          "ru": "у ресепшена",
+          "example": "I am at the reception.",
+          "warn": true,
+          "group": "Места"
+        }
+      ]
+    },
+    {
+      "id": "deck-adj",
+      "title": "Прилагательные",
+      "cards": [
+        {
+          "id": "v18",
+          "en": "tired",
+          "ru": "усталый",
+          "example": "I am tired.",
+          "group": "Прилагательные"
+        },
+        {
+          "id": "v19",
+          "en": "reception",
+          "ru": "ресепшен",
+          "example": "Where is the reception?",
+          "warn": true,
+          "group": "Прилагательные"
+        },
+        {
+          "id": "v20",
+          "en": "expensive",
+          "ru": "дорогой",
+          "example": "The taxi is expensive.",
+          "warn": true,
+          "group": "Прилагательные"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,482 @@
+{
+  "id": "S1",
+  "title": "Диагностика + порядок слов",
+  "date": "2026-11-12",
+  "status": "done",
+  "sheets": [
+    {
+      "id": "s1-cover",
+      "type": "cover",
+      "title": "Урок S1",
+      "body": "Диагностика после паузы + повтор важного с июля: кто + глагол + что. Говорим вслух, пишем в тетради.",
+      "pencilNotes": ["Цель: снова уверенно собирать простые предложения."]
+    },
+    {
+      "id": "s1-review",
+      "type": "review",
+      "title": "Повтор: что могло забыться",
+      "body": "В июле мы уже трогали порядок слов и he/she + -s. Сейчас без правил — просто вспомни.",
+      "exercises": [
+        {
+          "id": "s1-r1",
+          "type": "choice",
+          "prompt": "Выбери правильный вариант",
+          "payload": {
+            "sentence": "She ___ to the airport.",
+            "options": ["go", "goes", "going"]
+          },
+          "answer": "goes",
+          "explain": "he/she/it → глагол с -s: go → goes."
+        },
+        {
+          "id": "s1-r2",
+          "type": "fix",
+          "prompt": "Исправь ошибку",
+          "payload": {
+            "broken": "I like a Thailand."
+          },
+          "accepted": ["I like Thailand.", "I like Thailand"],
+          "explain": "Названия стран обычно без a: Thailand, не a Thailand."
+        }
+      ]
+    },
+    {
+      "id": "s1-cold",
+      "type": "cold",
+      "title": "Холодная попытка (без правил)",
+      "body": "Переведи как чувствуешь. Правила ещё не смотри — это снимок «до».",
+      "pencilNotes": ["Можно надиктовать с клавиатуры iPhone 🎤"],
+      "exercises": [
+        {
+          "id": "s1-c1",
+          "type": "translate",
+          "prompt": "Я хочу билет.",
+          "accepted": ["I want a ticket.", "I want a ticket"],
+          "explain": "Порядок: I + want + a ticket."
+        },
+        {
+          "id": "s1-c2",
+          "type": "translate",
+          "prompt": "Она едет в аэропорт.",
+          "accepted": [
+            "She goes to the airport.",
+            "She goes to the airport"
+          ],
+          "explain": "She + goes (+s) + to the airport."
+        },
+        {
+          "id": "s1-c3",
+          "type": "translate",
+          "prompt": "Им нужна помощь.",
+          "accepted": ["They need help.", "They need help"],
+          "explain": "help без a — неисчисляемое. They need help."
+        }
+      ]
+    },
+    {
+      "id": "s1-explain",
+      "type": "explain",
+      "title": "Как устроено предложение",
+      "body": "В английском порядок почти всегда один. Глагол обязателен. Без «перестановки как в русском».",
+      "schema": {
+        "caption": "Формула S + V (+ O)",
+        "headers": ["Кто (S)", "Глагол (V)", "Что / куда (O)"],
+        "rows": [
+          ["I", "want", "a ticket"],
+          ["She", "goes", "to the airport"],
+          ["We", "have", "a flight"],
+          ["They", "need", "help"]
+        ]
+      },
+      "pencilNotes": [
+        "he/she/it → wantS, goeS, haS",
+        "Thailand / help / food — часто без a",
+        "the airport = тот самый аэропорт"
+      ]
+    },
+    {
+      "id": "s1-practice",
+      "type": "practice",
+      "title": "Практика в тетради",
+      "body": "Уже со знанием правила. Проверь себя — потом «Показать решение».",
+      "exercises": [
+        {
+          "id": "s1-p1",
+          "type": "order",
+          "prompt": "Собери предложение",
+          "payload": {
+            "tokens": ["want", "I", "a ticket"]
+          },
+          "accepted": ["I want a ticket"],
+          "explain": "Сначала кто (I), потом глагол (want), потом объект."
+        },
+        {
+          "id": "s1-p2",
+          "type": "order",
+          "prompt": "Собери предложение",
+          "payload": {
+            "tokens": ["goes", "she", "to the airport"]
+          },
+          "accepted": ["she goes to the airport", "She goes to the airport"],
+          "explain": "She goes… — не forget -s."
+        },
+        {
+          "id": "s1-p3",
+          "type": "gap",
+          "prompt": "Вставь форму глагола",
+          "payload": {
+            "sentence": "He ___ a passport.",
+            "options": ["want", "wants", "wanting"]
+          },
+          "answer": "wants",
+          "explain": "He → wants (с -s)."
+        },
+        {
+          "id": "s1-p4",
+          "type": "gap",
+          "prompt": "Артикль или ничего?",
+          "payload": {
+            "sentence": "I go to ___ airport.",
+            "options": ["a", "the", "—"]
+          },
+          "answer": "the",
+          "explain": "to the airport — конкретное место."
+        },
+        {
+          "id": "s1-p5",
+          "type": "match",
+          "prompt": "Сопоставь",
+          "payload": {
+            "pairs": [
+              { "left": "go", "right": "идти / ехать" },
+              { "left": "want", "right": "хотеть" },
+              { "left": "need", "right": "нуждаться" },
+              { "left": "luggage", "right": "багаж" }
+            ]
+          },
+          "explain": "Базовые слова для аэропорта и желаний."
+        },
+        {
+          "id": "s1-p6",
+          "type": "translate",
+          "prompt": "У нас есть рейс.",
+          "hint": "Можно надиктовать с клавиатуры 🎤",
+          "accepted": ["We have a flight.", "We have a flight"],
+          "explain": "We have a flight — have без -s для we."
+        },
+        {
+          "id": "s1-p7",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": {
+            "broken": "She want food."
+          },
+          "accepted": [
+            "She wants food.",
+            "She wants some food.",
+            "She wants food",
+            "She wants some food"
+          ],
+          "explain": "She wants… Food обычно без a (можно some food)."
+        }
+      ]
+    },
+    {
+      "id": "s1-voice",
+      "type": "voice",
+      "title": "Голос",
+      "body": "Скажи фразу вслух. Можно кнопку микрофона на сайте или диктовку клавиатуры iPhone.",
+      "exercises": [
+        {
+          "id": "s1-v1",
+          "type": "speak",
+          "prompt": "Я хочу билет.",
+          "payload": {
+            "target": "I want a ticket"
+          },
+          "accepted": ["I want a ticket.", "I want a ticket"],
+          "explain": "I want a ticket."
+        },
+        {
+          "id": "s1-v2",
+          "type": "speak",
+          "prompt": "Она едет в аэропорт.",
+          "payload": {
+            "target": "She goes to the airport"
+          },
+          "accepted": [
+            "She goes to the airport.",
+            "She goes to the airport"
+          ],
+          "explain": "She goes — с -s."
+        }
+      ]
+    },
+    {
+      "id": "s1-test",
+      "type": "test",
+      "title": "Мини-тест",
+      "body": "Порог: ≥ 70% (минимум 5 из 7).",
+      "exercises": [
+        {
+          "id": "s1-t1",
+          "type": "order",
+          "prompt": "Расставь слова",
+          "payload": {
+            "tokens": ["have", "we", "a flight"]
+          },
+          "accepted": ["we have a flight", "We have a flight"],
+          "explain": "We have a flight."
+        },
+        {
+          "id": "s1-t2",
+          "type": "choice",
+          "prompt": "Выбери",
+          "payload": {
+            "sentence": "He ___ help.",
+            "options": ["need", "needs", "needing"]
+          },
+          "answer": "needs",
+          "explain": "He needs help — и help без a."
+        },
+        {
+          "id": "s1-t3",
+          "type": "translate",
+          "prompt": "Мне нравится Таиланд.",
+          "accepted": ["I like Thailand.", "I like Thailand"],
+          "explain": "Без a перед Thailand."
+        },
+        {
+          "id": "s1-t4",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": {
+            "broken": "They need a help."
+          },
+          "accepted": ["They need help.", "They need help"],
+          "explain": "help неисчисляемое → без a."
+        },
+        {
+          "id": "s1-t5",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "You ___ a passport.",
+            "options": ["have", "has", "haves"]
+          },
+          "answer": "have",
+          "explain": "you → have (не has)."
+        },
+        {
+          "id": "s1-t6",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": {
+            "tokens": ["likes", "he", "Thailand"]
+          },
+          "accepted": ["he likes Thailand", "He likes Thailand"],
+          "explain": "He likes Thailand."
+        },
+        {
+          "id": "s1-t7",
+          "type": "translate",
+          "prompt": "Она хочет еду.",
+          "accepted": [
+            "She wants food.",
+            "She wants some food.",
+            "She wants food",
+            "She wants some food"
+          ],
+          "explain": "She wants… + food / some food."
+        }
+      ]
+    },
+    {
+      "id": "s1-vocab",
+      "type": "vocab",
+      "title": "Слова урока — проверка",
+      "body": "Переведи с русского на английский.",
+      "exercises": [
+        {
+          "id": "s1-w1",
+          "type": "translate",
+          "prompt": "хотеть",
+          "accepted": ["want", "Want", "to want"],
+          "explain": "want"
+        },
+        {
+          "id": "s1-w2",
+          "type": "translate",
+          "prompt": "нуждаться / нужно",
+          "accepted": ["need", "Need", "to need"],
+          "explain": "need"
+        },
+        {
+          "id": "s1-w3",
+          "type": "translate",
+          "prompt": "билет",
+          "accepted": ["ticket", "a ticket", "Ticket"],
+          "explain": "ticket"
+        },
+        {
+          "id": "s1-w4",
+          "type": "translate",
+          "prompt": "аэропорт",
+          "accepted": ["airport", "the airport", "Airport"],
+          "explain": "airport"
+        },
+        {
+          "id": "s1-w5",
+          "type": "translate",
+          "prompt": "рейс",
+          "accepted": ["flight", "a flight", "Flight"],
+          "explain": "flight"
+        },
+        {
+          "id": "s1-w6",
+          "type": "translate",
+          "prompt": "багаж",
+          "accepted": ["luggage", "Luggage", "baggage", "Baggage"],
+          "explain": "luggage (без a)"
+        },
+        {
+          "id": "s1-w7",
+          "type": "translate",
+          "prompt": "пляж",
+          "accepted": ["beach", "the beach", "Beach"],
+          "explain": "beach"
+        },
+        {
+          "id": "s1-w8",
+          "type": "translate",
+          "prompt": "помощь",
+          "accepted": ["help", "Help"],
+          "explain": "help (часто без a)"
+        }
+      ]
+    },
+    {
+      "id": "s1-hw",
+      "type": "hw",
+      "title": "ДЗ — до следующего урока",
+      "body": "Сделай все задания ниже. После каждого — Проверить. Если ошибка — Показать решение.",
+      "pencilNotes": [
+        "Между уроками: этот лист + карточки «повтор» + Duo 5 мин.",
+        "В чате перед следующим разом: «Урок»."
+      ],
+      "exercises": [
+        {
+          "id": "s1-hw1",
+          "type": "translate",
+          "prompt": "Я еду в отель.",
+          "accepted": ["I go to the hotel.", "I go to the hotel"],
+          "explain": "I go + to the hotel (the = конкретное место)."
+        },
+        {
+          "id": "s1-hw2",
+          "type": "translate",
+          "prompt": "Он хочет воду.",
+          "accepted": ["He wants water.", "He wants some water.", "He wants water", "He wants some water"],
+          "explain": "He wants… Water обычно без a."
+        },
+        {
+          "id": "s1-hw3",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "She go to Phuket." },
+          "accepted": ["She goes to Phuket.", "She goes to Phuket"],
+          "explain": "She → goes. Город без the."
+        },
+        {
+          "id": "s1-hw4",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": { "tokens": ["need", "they", "a taxi"] },
+          "accepted": ["they need a taxi", "They need a taxi"],
+          "explain": "They need a taxi."
+        },
+        {
+          "id": "s1-hw5",
+          "type": "gap",
+          "prompt": "Выбери",
+          "payload": {
+            "sentence": "___ passport is here.",
+            "options": ["A", "The", "—"]
+          },
+          "answer": "The",
+          "explain": "The passport — тот самый, уже известный."
+        },
+        {
+          "id": "s1-hw6",
+          "type": "translate",
+          "prompt": "Нам нужен пляж.",
+          "accepted": ["We need the beach.", "We need a beach.", "We need the beach", "We need a beach"],
+          "explain": "need + a/the beach — оба возможны; the = конкретный пляж рядом."
+        },
+        {
+          "id": "s1-hw7",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "I like a Thai food." },
+          "accepted": ["I like Thai food.", "I like Thai food"],
+          "explain": "Thai food — категория еды, без a."
+        },
+        {
+          "id": "s1-hw8",
+          "type": "choice",
+          "prompt": "Выбери",
+          "payload": {
+            "sentence": "My girlfriend ___ Bangkok.",
+            "options": ["like", "likes", "liking"]
+          },
+          "answer": "likes",
+          "explain": "She/girlfriend → likes."
+        },
+        {
+          "id": "s1-hw9",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": { "tokens": ["have", "we", "luggage"] },
+          "accepted": ["we have luggage", "We have luggage"],
+          "explain": "luggage без a."
+        },
+        {
+          "id": "s1-hw10",
+          "type": "speak",
+          "prompt": "Я хочу поехать в аэропорт.",
+          "payload": { "target": "I want to go to the airport" },
+          "accepted": ["I want to go to the airport.", "I want to go to the airport"],
+          "explain": "to the airport — с the."
+        },
+        {
+          "id": "s1-hw11",
+          "type": "translate",
+          "prompt": "Она имеет билет на рейс.",
+          "accepted": [
+            "She has a ticket.",
+            "She has a flight ticket.",
+            "She has a ticket for the flight.",
+            "She has a ticket",
+            "She has a flight ticket",
+            "She has a ticket for the flight"
+          ],
+          "explain": "She has… (не have)."
+        },
+        {
+          "id": "s1-hw12",
+          "type": "match",
+          "prompt": "Сопоставь",
+          "payload": {
+            "pairs": [
+              { "left": "flight", "right": "рейс" },
+              { "left": "gate", "right": "выход на посадку" },
+              { "left": "boarding pass", "right": "посадочный" },
+              { "left": "suitcase", "right": "чемодан" }
+            ]
+          },
+          "explain": "Слова аэропорта — новые к повтору want/go."
+        }
+      ]
+    }
+  ]
+}

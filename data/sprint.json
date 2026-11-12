@@ -1,0 +1,82 @@
+{
+  "blocks": [
+    {
+      "id": "A",
+      "title": "Скелет предложения",
+      "lessons": [
+        { "id": "S1", "title": "Диагностика + порядок слов", "status": "done" },
+        { "id": "S2", "title": "to be: am / is / are", "status": "done" },
+        { "id": "S3", "title": "to be: отрицание + вопросы", "status": "current" },
+        { "id": "S4", "title": "want / need / have / like", "status": "todo" },
+        { "id": "S5", "title": "he/she + -s", "status": "todo" },
+        { "id": "S6", "title": "a / an / the / ∅", "status": "todo" },
+        { "id": "S7", "title": "There is / How much", "status": "todo" },
+        { "id": "S8", "title": "Предлоги in/on/at/to", "status": "todo" },
+        { "id": "S9", "title": "Контроль блока A", "status": "todo" }
+      ]
+    },
+    {
+      "id": "B",
+      "title": "Путешествие / быт",
+      "lessons": [
+        { "id": "S10", "title": "Аэропорт: check-in / gate", "status": "todo" },
+        { "id": "S11", "title": "Паспортный контроль", "status": "todo" },
+        { "id": "S12", "title": "Багаж / delay / lost", "status": "todo" },
+        { "id": "S13", "title": "Отель check-in", "status": "todo" },
+        { "id": "S14", "title": "Еда: заказ и счёт", "status": "todo" },
+        { "id": "S15", "title": "Уличная еда / аллергии", "status": "todo" },
+        { "id": "S16", "title": "Grab / такси / байк", "status": "todo" },
+        { "id": "S17", "title": "Ориентирование / where is", "status": "todo" },
+        { "id": "S18", "title": "Рынок / торг", "status": "todo" },
+        { "id": "S19", "title": "ТЦ / return", "status": "todo" },
+        { "id": "S20", "title": "Деньги / ATM", "status": "todo" },
+        { "id": "S21", "title": "Аптека", "status": "todo" },
+        { "id": "S22", "title": "Врач / clinic", "status": "todo" },
+        { "id": "S23", "title": "Past Simple минимум", "status": "todo" },
+        { "id": "S24", "title": "Контроль блока B", "status": "todo" }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "Гибкость речи",
+      "lessons": [
+        { "id": "S25", "title": "Present Continuous", "status": "todo" },
+        { "id": "S26", "title": "Can / Could", "status": "todo" },
+        { "id": "S27", "title": "Would like / Could you", "status": "todo" },
+        { "id": "S28", "title": "Going to + will", "status": "todo" },
+        { "id": "S29", "title": "Уточнения / say again", "status": "todo" },
+        { "id": "S30", "title": "Проблемы / lost / help", "status": "todo" },
+        { "id": "S31", "title": "Экскурсии / гид", "status": "todo" },
+        { "id": "S32", "title": "Контроль блока C", "status": "todo" }
+      ]
+    },
+    {
+      "id": "D",
+      "title": "Живое общение + твои сцены",
+      "lessons": [
+        { "id": "S33", "title": "Small talk 1", "status": "todo" },
+        { "id": "S34", "title": "Small talk 2", "status": "todo" },
+        { "id": "S35", "title": "Сёрф-урок с инструктором", "status": "todo" },
+        { "id": "S36", "title": "Пляж / аренда / activities", "status": "todo" },
+        { "id": "S37", "title": "Жильё на месяц", "status": "todo" },
+        { "id": "S38", "title": "Чат/телефон English", "status": "todo" },
+        { "id": "S39", "title": "Пекин layover", "status": "todo" },
+        { "id": "S40", "title": "Пхукет arrival day", "status": "todo" }
+      ]
+    },
+    {
+      "id": "E",
+      "title": "Автомат под стрессом",
+      "lessons": [
+        { "id": "S41", "title": "Сквозной день 1", "status": "todo" },
+        { "id": "S42", "title": "Сквозной день 2", "status": "todo" },
+        { "id": "S43", "title": "Сквозной день 3", "status": "todo" },
+        { "id": "S44", "title": "Сквозной день 4 (сёрф+рынок)", "status": "todo" },
+        { "id": "S45", "title": "Стресс-тест: шум/скорость", "status": "todo" },
+        { "id": "S46", "title": "Weak-spots intensive", "status": "todo" },
+        { "id": "S47", "title": "Финал: грамматика", "status": "todo" },
+        { "id": "S48", "title": "Финал: говорение 8 сцен", "status": "todo" }
+      ]
+    }
+  ]
+}
