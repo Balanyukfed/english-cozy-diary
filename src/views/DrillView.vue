@@ -66,9 +66,15 @@ watch(deckCards, () => {
   if (vocab.value) start()
 })
 
+/** Current top + peeks under it (stable keys → peeks slide forward). */
+const visibleCards = computed(() => {
+  if (done.value) return [] as DeckCard[]
+  // Keep the flying card in the list until the animation ends.
+  const startAt = index.value
+  return queue.value.slice(startAt, startAt + 4)
+})
+
 const remaining = computed(() => Math.max(0, queue.value.length - index.value))
-const current = computed(() => queue.value[index.value] ?? null)
-const stackPeek = computed(() => queue.value.slice(index.value + 1, index.value + 4))
 
 const progressLabel = computed(() => {
   if (!queue.value.length) return '0 / 0'
@@ -76,8 +82,14 @@ const progressLabel = computed(() => {
   return `${n} / ${queue.value.length}`
 })
 
+function depthFor(i: number) {
+  // While top flies away, everyone under it steps one level forward.
+  if (flying.value && i > 0) return i - 1
+  return i
+}
+
 function onCardTap() {
-  if (!current.value || flying.value || done.value) return
+  if (!visibleCards.value[0] || flying.value || done.value) return
   if (!flipped.value) {
     flipped.value = true
     return
@@ -86,18 +98,22 @@ function onCardTap() {
 }
 
 function advance() {
-  if (flying.value || !current.value) return
+  if (flying.value || !visibleCards.value[0]) return
   flying.value = true
   window.setTimeout(() => {
-    flying.value = false
     flipped.value = false
     if (index.value >= queue.value.length - 1) {
       done.value = true
       index.value = queue.value.length
+      flying.value = false
       return
     }
     index.value += 1
-  }, 320)
+    // next frame: clear flying so the new top stays put (already at depth 0)
+    requestAnimationFrame(() => {
+      flying.value = false
+    })
+  }, 380)
 }
 
 function exit() {
@@ -131,38 +147,43 @@ function exit() {
       </div>
     </div>
 
-    <div v-else-if="!current" class="drill__empty">
+    <div v-else-if="!visibleCards.length" class="drill__empty">
       <p>В этой колоде пока пусто.</p>
       <button type="button" class="btn btn--ghost" @click="exit">Назад</button>
     </div>
 
     <div v-else class="drill__stage">
       <div class="stack" aria-live="polite">
-        <div
-          v-for="(peek, i) in [...stackPeek].reverse()"
-          :key="`peek-${peek.id}-${index}-${i}`"
-          class="stack__ghost"
-          :style="{
-            '--i': stackPeek.length - 1 - i,
-          }"
-          aria-hidden="true"
-        />
-
         <button
+          v-for="(card, i) in visibleCards"
+          :key="card.id"
           type="button"
-          class="stack__card"
-          :class="{ 'is-flipped': flipped, 'is-flying': flying }"
-          @click="onCardTap"
+          class="stack__layer"
+          :class="{
+            'is-exit': flying && i === 0,
+            'is-top': depthFor(i) === 0 && !(flying && i === 0),
+            'is-flipped': i === 0 && flipped && !flying,
+            'is-peek': depthFor(i) > 0,
+          }"
+          :style="{
+            '--depth': depthFor(i),
+            zIndex: flying && i === 0 ? 30 : 20 - depthFor(i),
+          }"
+          :tabindex="i === 0 && !flying ? 0 : -1"
+          :aria-hidden="i !== 0"
+          @click="i === 0 ? onCardTap() : undefined"
         >
           <div class="stack__face stack__face--front">
-            <span class="stack__lang">RU</span>
-            <p class="stack__text">{{ current.ru }}</p>
-            <span class="stack__cue">тап — ответ</span>
+            <template v-if="depthFor(i) === 0 && !(flying && i === 0)">
+              <span class="stack__lang">RU</span>
+              <p class="stack__text">{{ card.ru }}</p>
+              <span class="stack__cue">тап — ответ</span>
+            </template>
           </div>
           <div class="stack__face stack__face--back">
             <span class="stack__lang">EN</span>
-            <p class="stack__text">{{ current.en }}</p>
-            <p v-if="current.example" class="stack__example">{{ current.example }}</p>
+            <p class="stack__text">{{ card.en }}</p>
+            <p v-if="card.example" class="stack__example">{{ card.example }}</p>
             <span class="stack__cue">тап — следующая</span>
           </div>
         </button>
@@ -247,37 +268,38 @@ function exit() {
   height: min(58dvh, 26rem);
 }
 
-.stack__ghost {
+.stack__layer {
   position: absolute;
   inset: 0;
-  border-radius: 22px;
-  background: #fffcf7;
-  border: 1px solid rgba(210, 194, 175, 0.65);
-  box-shadow: var(--shadow-warm);
-  transform: translateY(calc(var(--i) * 10px)) scale(calc(1 - var(--i) * 0.035))
-    rotate(calc(var(--i) * -1.6deg));
-  transform-origin: 50% 100%;
-  opacity: calc(1 - var(--i) * 0.18);
-}
-
-.stack__card {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
   border: none;
   padding: 0;
   background: transparent;
-  cursor: pointer;
-  perspective: 1200px;
-  -webkit-tap-highlight-color: transparent;
+  cursor: default;
+  transform-origin: 50% 100%;
+  transform: translateY(calc(var(--depth) * 11px)) scale(calc(1 - var(--depth) * 0.04))
+    rotate(calc(var(--depth) * -1.8deg));
+  opacity: calc(1 - var(--depth) * 0.16);
   transition:
-    transform 0.32s ease,
-    opacity 0.32s ease;
+    transform 0.38s cubic-bezier(0.22, 0.9, 0.28, 1),
+    opacity 0.38s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.stack__card.is-flying {
-  transform: translateX(120%) rotate(12deg);
+.stack__layer.is-top {
+  cursor: pointer;
+}
+
+.stack__layer.is-exit {
+  transform: translate(118%, -6%) rotate(16deg) scale(1);
   opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.38s cubic-bezier(0.4, 0.05, 0.7, 0.2),
+    opacity 0.3s ease;
+}
+
+.stack__layer.is-peek {
+  pointer-events: none;
 }
 
 .stack__face {
@@ -294,9 +316,6 @@ function exit() {
   gap: 0.65rem;
   padding: 1.4rem 1.2rem;
   box-sizing: border-box;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
 .stack__face--front {
@@ -312,12 +331,16 @@ function exit() {
     #f3ebe0;
 }
 
-.stack__card.is-flipped .stack__face--front {
+.stack__layer.is-flipped .stack__face--front {
   display: none;
 }
 
-.stack__card.is-flipped .stack__face--back {
+.stack__layer.is-flipped .stack__face--back {
   display: flex;
+}
+
+.stack__layer.is-peek .stack__face {
+  box-shadow: var(--shadow-warm);
 }
 
 .stack__lang {
@@ -379,7 +402,7 @@ function exit() {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stack__card {
+  .stack__layer {
     transition: none;
   }
 }
