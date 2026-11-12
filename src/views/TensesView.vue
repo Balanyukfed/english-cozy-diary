@@ -33,15 +33,19 @@ onMounted(() => {
 }
 
 .card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
+  column-count: 2;
+  column-gap: 0.55rem;
+}
+
+.card-grid :deep(.flash) {
+  break-inside: avoid;
+  margin: 0 0 0.55rem;
 }
 
 @media (min-width: 720px) {
   .card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.85rem;
+    column-count: 3;
+    column-gap: 0.65rem;
   }
 }
 </style>

@@ -41,18 +41,17 @@ const flipped = ref(false)
 .flash {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1.05;
   border: none;
   background: transparent;
   perspective: 900px;
   cursor: pointer;
   padding: 0;
+  text-align: inherit;
 }
 
 .flash__inner {
-  position: relative;
+  display: grid;
   width: 100%;
-  height: 100%;
   transition: transform 0.45s ease;
   transform-style: preserve-3d;
 }
@@ -62,22 +61,23 @@ const flipped = ref(false)
 }
 
 .flash__face {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
   backface-visibility: hidden;
-  border-radius: var(--radius-card);
-  padding: 0.85rem 0.9rem;
+  border-radius: 12px;
+  padding: 0.55rem 0.65rem;
+  min-height: 3.6rem;
   background: #fffcf7;
   box-shadow: var(--shadow-warm);
   border: 1px solid rgba(210, 194, 175, 0.65);
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .flash__face--front {
   align-items: center;
-  justify-content: center;
   text-align: center;
+  position: relative;
 }
 
 .flash__face--back {
@@ -93,38 +93,38 @@ const flipped = ref(false)
 
 .flash__title {
   font-family: var(--font-display);
-  font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+  font-size: 0.92rem;
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.25;
   text-align: center;
 }
 
 .flash__back-title {
   font-family: var(--font-display);
-  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
-  margin: 0 0 0.35rem;
-  line-height: 1.3;
+  font-size: 0.9rem;
+  margin: 0 0 0.2rem;
+  line-height: 1.25;
   text-align: left;
 }
 
 .flash__line {
-  margin: 0 0 0.25rem;
+  margin: 0;
   color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.35;
+  font-size: 0.75rem;
+  line-height: 1.3;
   text-align: left;
 }
 
 .flash__tag {
   position: absolute;
-  top: 0.55rem;
-  right: 0.55rem;
-  font-size: 0.68rem;
+  top: 0.35rem;
+  right: 0.4rem;
+  font-size: 0.62rem;
   font-weight: 700;
   color: var(--ink-soft);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   border-radius: 999px;
-  padding: 0.15rem 0.45rem;
+  padding: 0.1rem 0.35rem;
 }
 
 .flash.is-warn .flash__face--front {

@@ -11,7 +11,12 @@ onMounted(() => {
 })
 
 const topWeak = computed(() => weakSpots.value?.find((w) => w.priority === 'high'))
-const todayCards = computed(() => vocab.value?.[0]?.cards.slice(0, 6) ?? [])
+const todayCards = computed(() => {
+  const all = vocab.value?.flatMap((d) => d.cards) ?? []
+  const warn = all.filter((c) => c.warn)
+  const rest = all.filter((c) => !c.warn)
+  return [...warn, ...rest].slice(0, 8)
+})
 </script>
 
 <template>
@@ -127,15 +132,19 @@ h1 {
 }
 
 .card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
+  column-count: 2;
+  column-gap: 0.55rem;
+}
+
+.card-grid :deep(.flash) {
+  break-inside: avoid;
+  margin: 0 0 0.55rem;
 }
 
 @media (min-width: 720px) {
   .card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.85rem;
+    column-count: 3;
+    column-gap: 0.65rem;
   }
 }
 </style>

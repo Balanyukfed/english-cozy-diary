@@ -128,12 +128,13 @@ async function copyTeacherReport() {
     </div>
 
     <div class="report no-swipe">
-      <button type="button" class="btn btn--soft btn--report" @click="copyTeacherReport">
-        Скопировать отчёт учителю
-      </button>
       <p class="report__hint">
-        Ошибки (даже исправленные) + твои заметки. После «урок прошли» / «дз сделал» — вставь в чат.
+        На ПК (`npm run dev`) ошибки и заметки сами пишутся в файл для учителя. После «урок прошли» /
+        «дз сделал» ничего копировать не нужно — просто напиши это в чат.
       </p>
+      <button type="button" class="report__fallback" @click="copyTeacherReport">
+        Запасной вариант: скопировать отчёт
+      </button>
       <p v-if="reportStatus" class="report__status">{{ reportStatus }}</p>
     </div>
   </section>
@@ -206,17 +207,23 @@ async function copyTeacherReport() {
   border-top: 1px dashed rgba(201, 184, 168, 0.65);
 }
 
-.btn--report {
-  min-height: 40px;
-  padding: 0.5rem 0.95rem;
-  font-size: 0.9rem;
-}
-
 .report__hint {
-  margin: 0.45rem 0 0;
+  margin: 0;
   font-size: 0.8rem;
   color: var(--ink-soft);
   line-height: 1.4;
+}
+
+.report__fallback {
+  margin-top: 0.45rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.78rem;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .report__status {

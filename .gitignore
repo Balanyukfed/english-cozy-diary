@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local student answers synced in dev (teacher reads on disk)
+../student-progress.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

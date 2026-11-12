@@ -57,8 +57,30 @@ function loadLesson(lessonId: string) {
   }
 }
 
+let syncTimer: ReturnType<typeof setTimeout> | null = null
+
+function syncToDisk(lessonId: string) {
+  // Only while `npm run dev` on PC — teacher reads english/student-progress.json
+  if (!import.meta.env.DEV) return
+  if (syncTimer) clearTimeout(syncTimer)
+  syncTimer = setTimeout(() => {
+    void fetch('/api/student-progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lessonId,
+        answers: store.value[lessonId] ?? {},
+        updatedAt: new Date().toISOString(),
+      }),
+    }).catch(() => {
+      /* offline / API missing — localStorage still holds data */
+    })
+  }, 400)
+}
+
 function persist(lessonId: string) {
   localStorage.setItem(storageKey(lessonId), JSON.stringify(store.value[lessonId] ?? {}))
+  syncToDisk(lessonId)
 }
 
 function formatValue(value: unknown): string {

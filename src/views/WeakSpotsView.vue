@@ -19,6 +19,10 @@ const label: Record<string, string> = {
 <template>
   <section>
     <h1>Хромает</h1>
+    <p class="intro">
+      Не навсегда. Если в отчётах уроков тема стабильно идёт без ошибок — учитель снижает приоритет
+      или помечает «закрыто» и убирает с фокуса.
+    </p>
     <article
       v-for="w in weakSpots ?? []"
       :key="w.id"
@@ -34,6 +38,13 @@ const label: Record<string, string> = {
 </template>
 
 <style scoped lang="scss">
+.intro {
+  margin: 0 0 0.85rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
 .item {
   padding: 1rem 1.1rem;
   margin: 0.75rem 0;

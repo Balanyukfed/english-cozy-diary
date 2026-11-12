@@ -80,6 +80,8 @@ export interface VocabCard {
   ru: string
   example?: string
   warn?: boolean
+  /** Theme bucket for «По группам» on Words screen */
+  group?: string
 }
 
 export interface TenseCard {

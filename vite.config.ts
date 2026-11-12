@@ -2,11 +2,13 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import { fileURLToPath, URL } from 'node:url'
+import { studentProgressApi } from './vite-plugin-student-progress.ts'
 
 export default defineConfig({
   base: './',
   plugins: [
     vue(),
+    studentProgressApi(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons/*.png'],
