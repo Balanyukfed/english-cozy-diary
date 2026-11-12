@@ -34,7 +34,7 @@ export const primaryNav: NavItem[] = [
     label: 'Слова',
     short: 'Слова',
     color: 'var(--sticker-mist)',
-    match: (p) => p.startsWith('/words'),
+    match: (p) => p === '/words' || p.startsWith('/words/'),
   },
   {
     to: '/tenses',

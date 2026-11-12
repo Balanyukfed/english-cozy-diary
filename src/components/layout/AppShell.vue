@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import BottomNav from './BottomNav.vue'
 import StickerNav from './StickerNav.vue'
+
+const route = useRoute()
+const focus = computed(() => route.meta.focus === true)
 </script>
 
 <template>
-  <div class="shell">
-    <StickerNav />
+  <div class="shell" :class="{ 'is-focus': focus }">
+    <StickerNav v-if="!focus" />
     <div class="shell__stage">
       <div class="notebook">
         <div class="notebook__spine" aria-hidden="true" />
@@ -14,7 +19,7 @@ import StickerNav from './StickerNav.vue'
         </main>
       </div>
     </div>
-    <BottomNav />
+    <BottomNav v-if="!focus" />
   </div>
 </template>
 
@@ -24,10 +29,19 @@ import StickerNav from './StickerNav.vue'
   padding-bottom: calc(var(--nav-h) + var(--safe-bottom));
 }
 
+.shell.is-focus {
+  padding-bottom: 0;
+}
+
 .shell__stage {
   width: min(920px, 100%);
   margin: 0 auto;
   padding: 0.85rem 0.75rem 1.25rem;
+}
+
+.shell.is-focus .shell__stage {
+  width: min(720px, 100%);
+  padding: 0.55rem 0.65rem 0.85rem;
 }
 
 .notebook {
@@ -37,8 +51,12 @@ import StickerNav from './StickerNav.vue'
   box-shadow: var(--shadow-page);
   border: 1px solid rgba(201, 184, 168, 0.55);
   min-height: calc(100dvh - var(--nav-h) - 2rem);
-  /* overflow:hidden ломает CSS-columns / masonry на iOS Safari */
   overflow: visible;
+}
+
+.shell.is-focus .notebook {
+  min-height: calc(100dvh - 1rem);
+  border-radius: 18px;
 }
 
 .notebook__spine {
@@ -53,6 +71,10 @@ import StickerNav from './StickerNav.vue'
   box-sizing: border-box;
 }
 
+.shell.is-focus .shell__main {
+  padding: 0.75rem 0.75rem 1rem;
+}
+
 @media (min-width: 900px) {
   .shell {
     display: grid;
@@ -63,9 +85,19 @@ import StickerNav from './StickerNav.vue'
     margin: 0 auto;
   }
 
+  .shell.is-focus {
+    display: block;
+    width: min(760px, calc(100% - 1.5rem));
+    padding-bottom: 1rem;
+  }
+
   .shell__stage {
     width: 100%;
     padding: 1.25rem 1rem 1.5rem 0;
+  }
+
+  .shell.is-focus .shell__stage {
+    padding: 1rem 0.5rem;
   }
 
   .notebook {
@@ -88,8 +120,16 @@ import StickerNav from './StickerNav.vue'
     border-right: 1px solid rgba(201, 184, 168, 0.35);
   }
 
+  .shell.is-focus .notebook__spine {
+    display: none;
+  }
+
   .shell__main {
     padding: 1.5rem 1.75rem 1.75rem 1.85rem;
+  }
+
+  .shell.is-focus .shell__main {
+    padding: 1rem 1.25rem 1.25rem;
   }
 }
 </style>
