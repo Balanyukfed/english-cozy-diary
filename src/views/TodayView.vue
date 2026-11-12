@@ -38,6 +38,7 @@ const todayCards = computed(() => {
     <article v-if="journal" class="page-block">
       <h2>Домашка</h2>
       <p>{{ journal.homework }}</p>
+      <RouterLink class="linkish" to="/stats">Успеваемость</RouterLink>
     </article>
 
     <article v-if="topWeak" class="page-block page-block--soft">

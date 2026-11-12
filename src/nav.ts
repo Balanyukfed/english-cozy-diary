@@ -22,11 +22,12 @@ export const primaryNav: NavItem[] = [
     match: (p) => p.startsWith('/diary'),
   },
   {
-    to: '/journal',
-    label: 'Прогресс',
-    short: 'Журнал',
+    to: '/stats',
+    label: 'Успеваемость',
+    short: 'Статы',
     color: 'var(--sticker-moss)',
-    match: (p) => p.startsWith('/journal') || p.startsWith('/sprint'),
+    match: (p) =>
+      p.startsWith('/stats') || p.startsWith('/journal') || p.startsWith('/sprint'),
   },
   {
     to: '/words',
@@ -70,6 +71,7 @@ export const mobileNav: NavItem[] = [
     color: 'var(--sticker-lilac)',
     match: (p) =>
       p.startsWith('/more') ||
+      p.startsWith('/stats') ||
       p.startsWith('/journal') ||
       p.startsWith('/sprint') ||
       p.startsWith('/weak') ||

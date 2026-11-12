@@ -253,3 +253,24 @@ export function matchesAccepted(input: string, accepted: string[] = []): boolean
   const n = normalizeAnswer(input)
   return accepted.some((a) => normalizeAnswer(a) === n)
 }
+
+/** All lesson ids that have answers in localStorage */
+export function listStoredLessonIds(): string[] {
+  const ids: string[] = []
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key?.startsWith('cozy-diary:answers:')) {
+        ids.push(key.slice('cozy-diary:answers:'.length))
+      }
+    }
+  } catch {
+    /* private mode */
+  }
+  return ids.sort()
+}
+
+export function peekLessonAnswers(lessonId: string): Record<string, AnswerState> {
+  loadLesson(lessonId)
+  return store.value[lessonId] ?? {}
+}

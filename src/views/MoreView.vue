@@ -2,7 +2,8 @@
 import { RouterLink } from 'vue-router'
 
 const links = [
-  { to: '/sprint', label: 'Схема спринта', color: 'var(--sticker-moss)' },
+  { to: '/stats', label: 'Успеваемость', color: 'var(--sticker-moss)' },
+  { to: '/sprint', label: 'Схема спринта', color: 'var(--sticker-butter)' },
   { to: '/journal', label: 'Журнал', color: 'var(--sticker-lilac)' },
   { to: '/weak', label: 'Хромает', color: 'var(--sticker-coral)' },
   { to: '/help', label: 'Справка', color: 'var(--sticker-sage)' },
