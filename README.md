@@ -27,7 +27,14 @@ npm run preview -- --host
 
 **Сайт:** https://balanyukfed.github.io/english-cozy-diary/
 
-После каждого урока / ДЗ: `git push origin main` из этой папки → Actions собирает и выкладывает Pages (~1–2 мин).
+После каждого урока / ДЗ из этой папки:
+
+```bash
+git add -A && git commit -m "S__: …" && git push origin main
+npm run deploy:pages
+```
+
+`deploy:pages` собирает `dist/` и пушит ветку `gh-pages` (именно она открывается на телефоне).
 
 В Safari: **Поделиться → На экран «Домой»**.
 
