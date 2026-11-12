@@ -39,7 +39,7 @@ export const primaryNav: NavItem[] = [
   {
     to: '/tenses',
     label: 'Грамматика',
-    short: 'Времена',
+    short: 'Грамм.',
     color: 'var(--sticker-butter)',
     match: (p) => p.startsWith('/tenses'),
   },

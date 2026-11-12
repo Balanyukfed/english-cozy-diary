@@ -248,7 +248,17 @@ const fieldTone = computed(() => {
     }"
   >
     <header class="exercise__head">
-      <p class="exercise__prompt">{{ exercise.prompt }}</p>
+      <div class="exercise__title-row">
+        <p class="exercise__prompt">{{ exercise.prompt }}</p>
+        <span
+          v-if="state.checked"
+          class="verdict"
+          :class="state.correct ? 'is-ok' : 'is-bad'"
+          :title="state.correct ? 'Верно' : 'Пока неверно'"
+        >
+          <span class="verdict__icon" aria-hidden="true">{{ state.correct ? '✓' : '–' }}</span>
+        </span>
+      </div>
       <p v-if="exercise.hint" class="hint">{{ exercise.hint }}</p>
     </header>
 
@@ -455,19 +465,61 @@ const fieldTone = computed(() => {
   }
 
   &.is-ok::before {
-    background: color-mix(in srgb, var(--ok) 70%, transparent);
+    background: color-mix(in srgb, var(--ok) 55%, transparent);
   }
 
   &.is-bad::before {
-    background: color-mix(in srgb, var(--bad) 70%, transparent);
+    background: color-mix(in srgb, var(--bad) 45%, transparent);
   }
 }
 
+.exercise__title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
 .exercise__prompt {
+  flex: 1;
   font-weight: 600;
   margin: 0 0 0.2rem;
   text-align: left;
   line-height: 1.35;
+}
+
+.verdict {
+  flex: 0 0 auto;
+  width: 1.55rem;
+  height: 1.55rem;
+  margin-top: 0.05rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  line-height: 1;
+  border: 1px solid transparent;
+
+  &.is-ok {
+    color: var(--ok);
+    background: color-mix(in srgb, var(--ok) 14%, white);
+    border-color: color-mix(in srgb, var(--ok) 28%, transparent);
+  }
+
+  &.is-bad {
+    color: var(--bad);
+    background: color-mix(in srgb, var(--bad) 10%, white);
+    border-color: color-mix(in srgb, var(--bad) 22%, transparent);
+  }
+}
+
+.verdict__icon {
+  font-weight: 700;
+}
+
+.verdict.is-bad .verdict__icon {
+  font-size: 1.1rem;
+  transform: translateY(-1px);
 }
 
 .hint {
@@ -542,25 +594,26 @@ const fieldTone = computed(() => {
   }
 
   &.is-ok {
-    border-color: color-mix(in srgb, var(--ok) 65%, transparent);
-    background: var(--ok-bg);
+    border-color: color-mix(in srgb, var(--ok) 40%, rgba(201, 184, 168, 0.85));
+    background: color-mix(in srgb, var(--ok) 8%, rgba(255, 255, 255, 0.55));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ok) 18%, transparent);
   }
 
   &.is-bad {
-    border-color: color-mix(in srgb, var(--bad) 55%, transparent);
-    background: var(--bad-bg);
+    border-color: color-mix(in srgb, var(--bad) 35%, rgba(201, 184, 168, 0.85));
+    background: color-mix(in srgb, var(--bad) 7%, rgba(255, 255, 255, 0.55));
   }
 }
 
 .field.is-ok {
-  border-color: color-mix(in srgb, var(--ok) 55%, transparent);
-  background: var(--ok-bg);
+  border-color: color-mix(in srgb, var(--ok) 40%, transparent);
+  background: color-mix(in srgb, var(--ok) 7%, rgba(255, 255, 255, 0.5));
   box-shadow: none;
 }
 
 .field.is-bad {
-  border-color: color-mix(in srgb, var(--bad) 50%, transparent);
-  background: var(--bad-bg);
+  border-color: color-mix(in srgb, var(--bad) 35%, transparent);
+  background: color-mix(in srgb, var(--bad) 6%, rgba(255, 255, 255, 0.5));
   box-shadow: none;
 }
 

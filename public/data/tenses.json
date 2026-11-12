@@ -1,55 +1,116 @@
 {
   "cards": [
     {
-      "id": "t1",
+      "id": "t-present-simple",
+      "title": "Present Simple",
+      "formula": "I/you/we/they + V · he/she/it + V-s  ·  факты, привычки, простые действия",
+      "examples": [
+        "I want a ticket.",
+        "She goes to the airport.",
+        "We have a flight."
+      ],
+      "mistake": "She go / He want",
+      "section": "tenses",
+      "unlockedBy": "S1"
+    },
+    {
+      "id": "t-to-be",
+      "title": "Present: to be (am / is / are)",
+      "formula": "I am · he/she/it is · you/we/they are  ·  кто/где/какой",
+      "examples": [
+        "I am tired.",
+        "The hotel is near the beach.",
+        "We are in Bangkok."
+      ],
+      "mistake": "I is tired. / She are here.",
+      "section": "tenses",
+      "unlockedBy": "S2"
+    },
+    {
+      "id": "t-present-cont",
+      "title": "Present Continuous",
+      "formula": "am/is/are + V-ing  ·  прямо сейчас в процессе",
+      "examples": [
+        "She is going to the gate.",
+        "I am waiting at reception."
+      ],
+      "mistake": "She going / I waiting",
+      "section": "tenses",
+      "unlockedBy": "S10"
+    },
+    {
+      "id": "t-past-simple",
+      "title": "Past Simple",
+      "formula": "V-ed / went, had, was…  ·  вчера, в поездке",
+      "examples": [
+        "I went to the market yesterday.",
+        "The room was clean."
+      ],
+      "mistake": "I go yesterday / She goed",
+      "section": "tenses",
+      "unlockedBy": "S19"
+    },
+    {
+      "id": "t-word-order",
       "title": "Порядок слов",
-      "formula": "КТО + ГЛАГОЛ + (ЧТО/КУДА)",
+      "formula": "КТО + ГЛАГОЛ + (ЧТО / КУДА)",
       "examples": [
         "I want a ticket.",
         "She goes to the airport."
       ],
-      "mistake": "Want I a ticket. / I ticket want."
+      "mistake": "Want I a ticket.",
+      "section": "structure",
+      "unlockedBy": "S1"
     },
     {
-      "id": "t2",
+      "id": "t-he-she-s",
       "title": "he / she / it + -s",
-      "formula": "I/you/we/they → go, want · he/she/it → goes, wants",
+      "formula": "I/you/we/they → go, want · he/she/it → goes, wants, has",
       "examples": [
         "I go to Bangkok.",
         "He goes to Bangkok."
       ],
-      "mistake": "She go / He want"
+      "mistake": "She go / He want",
+      "section": "structure",
+      "unlockedBy": "S1"
     },
     {
-      "id": "t3",
-      "title": "to be: am / is / are",
-      "formula": "I am · he/she/it is · you/we/they are",
-      "examples": [
-        "I am at the airport.",
-        "They are ready."
-      ],
-      "mistake": "I is tired. / She are here."
-    },
-    {
-      "id": "t4",
-      "title": "Артикли: a / the / ∅",
-      "formula": "a = один считаемый · the = тот самый · страны/еда-категория без a",
+      "id": "t-articles",
+      "title": "Артикли a / the / ∅",
+      "formula": "a = один считаемый · the = тот самый · категория/страна часто без a",
       "examples": [
         "I want a ticket.",
         "I go to the airport.",
         "I like Thailand."
       ],
-      "mistake": "a Thailand / a help / to airport"
+      "mistake": "a Thailand / a help / to airport",
+      "section": "structure",
+      "unlockedBy": "S1"
     },
     {
-      "id": "t5",
+      "id": "t-have-has",
       "title": "have / has",
       "formula": "I/you/we/they have · he/she/it has",
       "examples": [
         "We have a flight.",
         "She has a passport."
       ],
-      "mistake": "He have a ticket."
+      "mistake": "He have a ticket.",
+      "section": "structure",
+      "unlockedBy": "S1"
+    },
+    {
+      "id": "t-prepositions",
+      "title": "in / on / at",
+      "formula": "in = внутри · on = на поверхности · at = у точки/места",
+      "examples": [
+        "She is in the lobby.",
+        "They are at the market.",
+        "I am at the reception."
+      ],
+      "mistake": "on the lobby / on the market",
+      "section": "structure",
+      "unlockedBy": "S2"
     }
   ]
 }

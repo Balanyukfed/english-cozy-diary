@@ -84,12 +84,18 @@ export interface VocabCard {
   group?: string
 }
 
+export type GrammarSection = 'tenses' | 'structure'
+
 export interface TenseCard {
   id: string
   title: string
   formula: string
   examples: string[]
   mistake: string
+  /** tenses = времена; structure = скелет/артикли/предлоги… */
+  section: GrammarSection
+  /** Appears after this lesson is unlocked (done or current) */
+  unlockedBy: string
 }
 
 export interface WeakSpot {
