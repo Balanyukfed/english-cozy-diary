@@ -1,3 +1,70 @@
 {
-  "items": []
+  "items": [
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-r2",
+      "question": "почему без a luggage, какое объяснение? почему не The?",
+      "answer": "luggage — неисчисляемое (как help/food): нельзя a luggage.\nThey need luggage = нужен багаж «вообще».\nThey need the luggage = тот конкретный багаж, о котором уже говорим (наши чемоданы у ленты).\nВ этой фразе имелось в виду «вообще» → без a и чаще без the."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-r3",
+      "question": "почему не he is going…?",
+      "answer": "He is going to the gate — тоже нормальный английский (Present Continuous: прямо сейчас в процессе).\nВ блоке A мы пока тренируем Present Simple: he goes… (факт/привычка/простая схема S+V).\nContinuous разберём отдельно позже.\nВажно: и там и там the gate — у тебя в ошибках дважды пропал the."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-r4",
+      "question": "кликнул не выбрав / пустой вариант",
+      "answer": "Да, для «ничего» нужно нажать вариант ∅ / —. Пустой клик «Проверить» без выбора — это баг удобства интерфейса, не твой английский. Сам ответ «без артикля» ты понял верно."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-c4",
+      "question": "почему не on а in?",
+      "answer": "in the lobby = внутри пространства (холл).\non обычно «на поверхности»: on the table, on the floor.\nЛобби — как комната → in.\n(Ещё бывает at the lobby в смысле «у точки», но учебный якорь: in the lobby.)"
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-p1",
+      "question": "почему at the reception, а не in/on?",
+      "answer": "at — у точки обслуживания / места назначения: at the reception, at the gate, at the desk.\nin — внутри помещения целиком.\non — на поверхности (не про стойку «я стою у ресепшена»).\nI am at the reception ≈ я у стойки."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-p2",
+      "question": "closed и -ed",
+      "answer": "Да, разберём. Коротко: closed здесь прилагательное («закрытый»), часто совпадает с формой глагола в Past (close → closed).\nОтдельно пройдём Past Simple и такие «-ed» слова как описание состояния."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-p5",
+      "question": "почему the bathroom?",
+      "answer": "the bathroom = та ванная (в номере / о которой ясно из ситуации).\nБез the звучало бы странно, как «ванная вообще как явление».\nВ отеле почти всегда: the bathroom, the lobby, the pool."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-p7",
+      "question": "почему засчитали без The? зачем The / A?",
+      "answer": "Taxi is expensive — читается как «такси (как вид) дорогое» = категория, поэтому без артикля тоже ок, я это принял.\nThe taxi is expensive — то конкретное такси.\nA taxi is expensive — «одно такое такси / любой пример».\nВсе три бывают; для «вообще про такси» чаще Taxi… или Taxis are…"
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-v3",
+      "question": "почему at а не on the market",
+      "answer": "at the market = на рынке (как в месте/событии).\non the market в английском чаще «выставлен на продажу» (квартира on the market), не «я гуляю по рынку».\nЯкорь: at the market / at the mall."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-w1",
+      "question": "этого слова вроде не было",
+      "answer": "tired появилось в холодной попытке («Я устал» → I am tired). Лист «слова» как раз закрепляет то, что уже мелькало в уроке, не только отдельный словарик до практики."
+    },
+    {
+      "lessonId": "S2",
+      "exerciseId": "s2-p11",
+      "question": "перепутал слово, не формулу",
+      "answer": "Ок — am/is/are ты собрал верно. Просто якорь: desk / reception / front desk. Опечатка reciption → reception (часто ловится)."
+    }
+  ]
 }

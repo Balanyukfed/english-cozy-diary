@@ -5,8 +5,8 @@
       "title": "Скелет предложения",
       "lessons": [
         { "id": "S1", "title": "Диагностика + порядок слов", "status": "done" },
-        { "id": "S2", "title": "to be: am / is / are", "status": "current" },
-        { "id": "S3", "title": "to be: отрицание + вопросы", "status": "todo" },
+        { "id": "S2", "title": "to be: am / is / are", "status": "done" },
+        { "id": "S3", "title": "to be: отрицание + вопросы", "status": "current" },
         { "id": "S4", "title": "want / need / have / like", "status": "todo" },
         { "id": "S5", "title": "he/she + -s", "status": "todo" },
         { "id": "S6", "title": "a / an / the / ∅", "status": "todo" },

@@ -120,6 +120,59 @@
           "example": "She goes to the beach.",
           "warn": true,
           "group": "Места"
+        },
+        {
+          "id": "v15",
+          "en": "in the lobby",
+          "ru": "в лобби",
+          "example": "She is in the lobby.",
+          "warn": true,
+          "group": "Места"
+        },
+        {
+          "id": "v16",
+          "en": "at the market",
+          "ru": "на рынке",
+          "example": "They are at the market.",
+          "warn": true,
+          "group": "Места"
+        },
+        {
+          "id": "v17",
+          "en": "at the reception",
+          "ru": "у ресепшена",
+          "example": "I am at the reception.",
+          "warn": true,
+          "group": "Места"
+        }
+      ]
+    },
+    {
+      "id": "deck-adj",
+      "title": "Прилагательные",
+      "cards": [
+        {
+          "id": "v18",
+          "en": "tired",
+          "ru": "усталый",
+          "example": "I am tired.",
+          "group": "Прилагательные"
+        },
+        {
+          "id": "v19",
+          "en": "reception",
+          "ru": "ресепшен",
+          "example": "Where is the reception?",
+          "warn": true,
+          "group": "Прилагательные"
+        },
+        {
+          "id": "v20",
+          "en": "expensive",
+          "ru": "дорогой",
+          "example": "The taxi is expensive.",
+          "warn": true,
+          "group": "Прилагательные"
         }
       ]
     }

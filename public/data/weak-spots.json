@@ -1,32 +1,46 @@
 {
   "items": [
     {
-      "id": "ws1",
+      "id": "ws5",
       "priority": "high",
-      "topic": "he / she / it + -s",
-      "why": "S1 прогнали; ещё не автомат (she go / he want)",
-      "plan": "Короткий повтор в каждом уроке блока A"
+      "topic": "in / on / at",
+      "why": "S2: on the lobby, on the market; вопросы про reception",
+      "plan": "Якоря: in the lobby · at the market/reception · on the table. Повтор в S3"
     },
     {
       "id": "ws2",
       "priority": "high",
       "topic": "Артикли a / the / ∅",
-      "why": "S1: Thailand / help / food / Thai food — держать",
-      "plan": "Якоря + практика до S6"
+      "why": "the gate / the AC; luggage без a; Taxi vs The taxi",
+      "plan": "Категория vs конкретное + места с the"
     },
     {
-      "id": "ws3",
+      "id": "ws1",
       "priority": "medium",
-      "topic": "the + места",
-      "why": "to airport вместо to the airport",
-      "plan": "Фразы-якоря в тетради"
+      "topic": "he / she / it + -s",
+      "why": "S1 ещё в памяти; в S2 меньше ошибок",
+      "plan": "Лёгкий повтор, не главный фокус"
+    },
+    {
+      "id": "ws6",
+      "priority": "medium",
+      "topic": "Present Simple vs Continuous",
+      "why": "Вопрос: goes vs is going",
+      "plan": "Пока Simple; Continuous — отдельный урок позже"
     },
     {
       "id": "ws4",
       "priority": "medium",
       "topic": "Говорение вслух",
-      "why": "Главная цель спринта",
-      "plan": "Голосовые задания + диктовка с клавиатуры"
+      "why": "Цель спринта",
+      "plan": "Speak RU→EN каждый урок"
+    },
+    {
+      "id": "ws7",
+      "priority": "low",
+      "topic": "Орфография reception / expensive / clean",
+      "why": "reciption, expencive, cleen в S2",
+      "plan": "Карточки + повтор в ДЗ"
     }
   ]
 }
