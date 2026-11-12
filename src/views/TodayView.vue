@@ -3,6 +3,8 @@ import { onMounted, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useData } from '@/composables/useData'
 import FlashCard from '@/components/cards/FlashCard.vue'
+import MasonryGrid from '@/components/cards/MasonryGrid.vue'
+import type { VocabCard } from '@/types'
 
 const { meta, journal, weakSpots, vocab, loadCore } = useData()
 
@@ -17,6 +19,10 @@ const todayCards = computed(() => {
   const rest = all.filter((c) => !c.warn)
   return [...warn, ...rest].slice(0, 8)
 })
+
+function cardKey(c: VocabCard) {
+  return c.id
+}
 </script>
 
 <template>
@@ -52,17 +58,17 @@ const todayCards = computed(() => {
         <h2>Карточки на сейчас</h2>
         <RouterLink class="linkish" to="/words">Все слова</RouterLink>
       </div>
-      <div class="card-masonry">
-        <FlashCard
-          v-for="c in todayCards"
-          :key="c.id"
-          :front="c.en"
-          :back-title="c.ru"
-          :back-lines="c.example ? [c.example] : []"
-          :warn="c.warn"
-          :tag="c.warn ? 'повтор' : undefined"
-        />
-      </div>
+      <MasonryGrid :items="todayCards" :get-key="cardKey">
+        <template #default="{ item: c }">
+          <FlashCard
+            :front="c.en"
+            :back-title="c.ru"
+            :back-lines="c.example ? [c.example] : []"
+            :warn="c.warn"
+            :tag="c.warn ? 'повтор' : undefined"
+          />
+        </template>
+      </MasonryGrid>
     </section>
   </section>
 </template>
@@ -116,6 +122,7 @@ h1 {
 
 .today__cards {
   margin-top: 1.1rem;
+  padding-bottom: 0.5rem;
 }
 
 .today__cards-head {
@@ -131,5 +138,4 @@ h1 {
   font-weight: 600;
   text-decoration: none;
 }
-
 </style>

@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useData } from '@/composables/useData'
 import FlashCard from '@/components/cards/FlashCard.vue'
+import MasonryGrid from '@/components/cards/MasonryGrid.vue'
 import type { GrammarSection, TenseCard } from '@/types'
 
 type Filter = 'all' | GrammarSection
@@ -16,7 +17,7 @@ onMounted(() => {
 const lessonRank = computed(() => {
   const order =
     sprint.value?.flatMap((b) => b.lessons.map((l) => l.id)) ??
-    Array.from({ length: 33 }, (_, i) => `S${i + 1}`)
+    Array.from({ length: 48 }, (_, i) => `S${i + 1}`)
   const unlocked = new Set(
     (sprint.value?.flatMap((b) => b.lessons) ?? [])
       .filter((l) => l.status === 'done' || l.status === 'current')
@@ -53,6 +54,10 @@ const tabs: { id: Filter; label: string }[] = [
   { id: 'tenses', label: 'Времена' },
   { id: 'structure', label: 'Структура' },
 ]
+
+function cardKey(c: TenseCard) {
+  return c.id
+}
 </script>
 
 <template>
@@ -80,16 +85,16 @@ const tabs: { id: Filter; label: string }[] = [
 
     <section v-if="visibleOpen.length" class="block">
       <h2 class="block__title">Изучено</h2>
-      <div class="card-masonry">
-        <FlashCard
-          v-for="c in visibleOpen"
-          :key="c.id"
-          :front="c.title"
-          :back-title="c.formula"
-          :back-lines="[...c.examples.slice(0, 2), `Не так: ${c.mistake}`]"
-          :tag="c.section === 'tenses' ? 'время' : 'структура'"
-        />
-      </div>
+      <MasonryGrid :items="visibleOpen" :get-key="cardKey">
+        <template #default="{ item: c }">
+          <FlashCard
+            :front="c.title"
+            :back-title="c.formula"
+            :back-lines="[...c.examples.slice(0, 2), `Не так: ${c.mistake}`]"
+            :tag="c.section === 'tenses' ? 'время' : 'структура'"
+          />
+        </template>
+      </MasonryGrid>
     </section>
 
     <section v-if="visibleLocked.length" class="block block--locked">
@@ -189,5 +194,4 @@ const tabs: { id: Filter; label: string }[] = [
   color: var(--ink-soft);
   white-space: nowrap;
 }
-
 </style>

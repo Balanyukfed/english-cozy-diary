@@ -2,6 +2,7 @@
 import { onMounted, ref, computed } from 'vue'
 import { useData } from '@/composables/useData'
 import FlashCard from '@/components/cards/FlashCard.vue'
+import MasonryGrid from '@/components/cards/MasonryGrid.vue'
 import type { VocabCard } from '@/types'
 
 const { vocab, loadCore } = useData()
@@ -56,6 +57,10 @@ const groups = computed((): CardGroup[] => {
   }
   return out
 })
+
+function cardKey(c: VocabCard) {
+  return c.id
+}
 </script>
 
 <template>
@@ -79,33 +84,33 @@ const groups = computed((): CardGroup[] => {
     </p>
 
     <template v-if="!grouped">
-      <div class="card-masonry">
-        <FlashCard
-          v-for="c in cards"
-          :key="c.id"
-          :front="c.en"
-          :back-title="c.ru"
-          :back-lines="c.example ? [c.example] : []"
-          :warn="c.warn"
-          :tag="c.warn ? 'повтор' : undefined"
-        />
-      </div>
-    </template>
-
-    <template v-else>
-      <section v-for="g in groups" :key="g.title" class="group">
-        <h2 class="group__title">{{ g.title }}</h2>
-        <div class="card-masonry">
+      <MasonryGrid :items="cards" :get-key="cardKey">
+        <template #default="{ item: c }">
           <FlashCard
-            v-for="c in g.cards"
-            :key="c.id"
             :front="c.en"
             :back-title="c.ru"
             :back-lines="c.example ? [c.example] : []"
             :warn="c.warn"
             :tag="c.warn ? 'повтор' : undefined"
           />
-        </div>
+        </template>
+      </MasonryGrid>
+    </template>
+
+    <template v-else>
+      <section v-for="g in groups" :key="g.title" class="group">
+        <h2 class="group__title">{{ g.title }}</h2>
+        <MasonryGrid :items="g.cards" :get-key="cardKey">
+          <template #default="{ item: c }">
+            <FlashCard
+              :front="c.en"
+              :back-title="c.ru"
+              :back-lines="c.example ? [c.example] : []"
+              :warn="c.warn"
+              :tag="c.warn ? 'повтор' : undefined"
+            />
+          </template>
+        </MasonryGrid>
       </section>
     </template>
   </section>
@@ -150,5 +155,4 @@ const groups = computed((): CardGroup[] => {
   font-size: 1rem;
   margin: 0 0 0.55rem;
 }
-
 </style>

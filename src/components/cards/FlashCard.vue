@@ -22,16 +22,14 @@ const flipped = ref(false)
     :class="{ 'is-flipped': flipped, 'is-warn': warn }"
     @click="flipped = !flipped"
   >
-    <div class="flash__inner">
+    <div class="flash__stage">
       <div class="flash__face flash__face--front">
         <span v-if="tag" class="flash__tag">{{ tag }}</span>
         <p class="flash__title">{{ front }}</p>
       </div>
       <div class="flash__face flash__face--back" aria-hidden="true">
-        <div class="flash__back-body">
-          <p v-if="backTitle" class="flash__back-title">{{ backTitle }}</p>
-          <p v-for="(line, i) in backLines" :key="i" class="flash__line">{{ line }}</p>
-        </div>
+        <p v-if="backTitle" class="flash__back-title">{{ backTitle }}</p>
+        <p v-for="(line, i) in backLines" :key="i" class="flash__line">{{ line }}</p>
       </div>
     </div>
   </button>
@@ -41,115 +39,95 @@ const flipped = ref(false)
 .flash {
   display: block;
   width: 100%;
-  max-width: 100%;
   border: none;
   background: transparent;
-  perspective: 900px;
-  -webkit-perspective: 900px;
-  cursor: pointer;
   padding: 0;
+  cursor: pointer;
   text-align: inherit;
-  /* WebKit columns: keep card as one unbreakable unit */
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.flash__inner {
+.flash__stage {
   position: relative;
   width: 100%;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-  transition: transform 0.45s ease;
-}
-
-.flash.is-flipped .flash__inner {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
 }
 
 .flash__face {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  width: 100%;
+  box-sizing: border-box;
   border-radius: 12px;
-  padding: 0.55rem 0.65rem;
-  min-height: 3.4rem;
+  padding: 0.65rem 0.7rem;
+  min-height: 3.5rem;
   background: #fffcf7;
   box-shadow: var(--shadow-warm);
   border: 1px solid rgba(210, 194, 175, 0.65);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-sizing: border-box;
+  gap: 0.25rem;
 }
 
 .flash__face--front {
-  position: relative;
-  align-items: center;
+  align-items: stretch;
   text-align: center;
 }
 
 .flash__face--back {
-  position: absolute;
-  inset: 0;
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  background: #f3ebe0;
-  justify-content: center;
+  display: none;
+  align-items: flex-start;
   text-align: left;
-  overflow: auto;
+  background: #f3ebe0;
 }
 
-.flash__back-body {
-  width: 100%;
+.flash.is-flipped .flash__face--front {
+  display: none;
+}
+
+.flash.is-flipped .flash__face--back {
+  display: flex;
+}
+
+.flash__tag {
+  align-self: flex-end;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  padding: 0.18rem 0.4rem;
+  margin: -0.15rem -0.1rem 0.1rem 0;
 }
 
 .flash__title {
   font-family: var(--font-display);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   margin: 0;
-  line-height: 1.25;
+  line-height: 1.3;
   text-align: center;
+  overflow-wrap: anywhere;
   word-break: break-word;
 }
 
 .flash__back-title {
   font-family: var(--font-display);
-  font-size: 0.9rem;
-  margin: 0 0 0.2rem;
-  line-height: 1.25;
+  font-size: 0.88rem;
+  margin: 0;
+  line-height: 1.3;
   text-align: left;
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .flash__line {
   margin: 0;
   color: var(--ink-soft);
   font-size: 0.75rem;
-  line-height: 1.3;
+  line-height: 1.35;
   text-align: left;
-  word-break: break-word;
-}
-
-.flash__tag {
-  position: absolute;
-  top: 0.35rem;
-  right: 0.4rem;
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: var(--ink-soft);
-  background: rgba(255, 255, 255, 0.75);
-  border-radius: 999px;
-  padding: 0.1rem 0.35rem;
+  overflow-wrap: anywhere;
 }
 
 .flash.is-warn .flash__face--front {
   border-color: color-mix(in srgb, var(--sticker-coral) 55%, #d2c2af);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .flash__inner {
-    transition: none;
-  }
 }
 </style>
