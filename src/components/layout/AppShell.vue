@@ -37,7 +37,8 @@ import StickerNav from './StickerNav.vue'
   box-shadow: var(--shadow-page);
   border: 1px solid rgba(201, 184, 168, 0.55);
   min-height: calc(100dvh - var(--nav-h) - 2rem);
-  overflow: hidden;
+  /* overflow:hidden ломает CSS-columns / masonry на iOS Safari */
+  overflow: visible;
 }
 
 .notebook__spine {
@@ -47,6 +48,9 @@ import StickerNav from './StickerNav.vue'
 .shell__main {
   position: relative;
   padding: 1.15rem 1rem 1.5rem 1.15rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 @media (min-width: 900px) {

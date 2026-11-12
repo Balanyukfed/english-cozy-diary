@@ -52,7 +52,7 @@ const todayCards = computed(() => {
         <h2>Карточки на сейчас</h2>
         <RouterLink class="linkish" to="/words">Все слова</RouterLink>
       </div>
-      <div class="card-grid">
+      <div class="card-masonry">
         <FlashCard
           v-for="c in todayCards"
           :key="c.id"
@@ -132,20 +132,4 @@ h1 {
   text-decoration: none;
 }
 
-.card-grid {
-  column-count: 2;
-  column-gap: 0.55rem;
-}
-
-.card-grid :deep(.flash) {
-  break-inside: avoid;
-  margin: 0 0 0.55rem;
-}
-
-@media (min-width: 720px) {
-  .card-grid {
-    column-count: 3;
-    column-gap: 0.65rem;
-  }
-}
 </style>

@@ -27,7 +27,7 @@ const flipped = ref(false)
         <span v-if="tag" class="flash__tag">{{ tag }}</span>
         <p class="flash__title">{{ front }}</p>
       </div>
-      <div class="flash__face flash__face--back">
+      <div class="flash__face flash__face--back" aria-hidden="true">
         <div class="flash__back-body">
           <p v-if="backTitle" class="flash__back-title">{{ backTitle }}</p>
           <p v-for="(line, i) in backLines" :key="i" class="flash__line">{{ line }}</p>
@@ -41,50 +41,63 @@ const flipped = ref(false)
 .flash {
   display: block;
   width: 100%;
+  max-width: 100%;
   border: none;
   background: transparent;
   perspective: 900px;
+  -webkit-perspective: 900px;
   cursor: pointer;
   padding: 0;
   text-align: inherit;
+  /* WebKit columns: keep card as one unbreakable unit */
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .flash__inner {
-  display: grid;
+  position: relative;
   width: 100%;
-  transition: transform 0.45s ease;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.45s ease;
 }
 
 .flash.is-flipped .flash__inner {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 .flash__face {
-  grid-area: 1 / 1;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 12px;
   padding: 0.55rem 0.65rem;
-  min-height: 3.6rem;
+  min-height: 3.4rem;
   background: #fffcf7;
   box-shadow: var(--shadow-warm);
   border: 1px solid rgba(210, 194, 175, 0.65);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .flash__face--front {
+  position: relative;
   align-items: center;
   text-align: center;
-  position: relative;
 }
 
 .flash__face--back {
+  position: absolute;
+  inset: 0;
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
   background: #f3ebe0;
   justify-content: center;
   text-align: left;
+  overflow: auto;
 }
 
 .flash__back-body {
@@ -97,6 +110,7 @@ const flipped = ref(false)
   margin: 0;
   line-height: 1.25;
   text-align: center;
+  word-break: break-word;
 }
 
 .flash__back-title {
@@ -105,6 +119,7 @@ const flipped = ref(false)
   margin: 0 0 0.2rem;
   line-height: 1.25;
   text-align: left;
+  word-break: break-word;
 }
 
 .flash__line {
@@ -113,6 +128,7 @@ const flipped = ref(false)
   font-size: 0.75rem;
   line-height: 1.3;
   text-align: left;
+  word-break: break-word;
 }
 
 .flash__tag {

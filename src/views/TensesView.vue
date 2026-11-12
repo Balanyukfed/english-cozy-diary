@@ -80,7 +80,7 @@ const tabs: { id: Filter; label: string }[] = [
 
     <section v-if="visibleOpen.length" class="block">
       <h2 class="block__title">Изучено</h2>
-      <div class="card-grid">
+      <div class="card-masonry">
         <FlashCard
           v-for="c in visibleOpen"
           :key="c.id"
@@ -160,16 +160,6 @@ const tabs: { id: Filter; label: string }[] = [
   color: var(--ink-soft);
 }
 
-.card-grid {
-  column-count: 2;
-  column-gap: 0.55rem;
-}
-
-.card-grid :deep(.flash) {
-  break-inside: avoid;
-  margin: 0 0 0.55rem;
-}
-
 .locked-list {
   list-style: none;
   margin: 0;
@@ -200,10 +190,4 @@ const tabs: { id: Filter; label: string }[] = [
   white-space: nowrap;
 }
 
-@media (min-width: 720px) {
-  .card-grid {
-    column-count: 3;
-    column-gap: 0.65rem;
-  }
-}
 </style>

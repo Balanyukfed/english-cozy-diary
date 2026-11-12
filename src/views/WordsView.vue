@@ -151,26 +151,4 @@ const groups = computed((): CardGroup[] => {
   margin: 0 0 0.55rem;
 }
 
-.card-masonry {
-  column-count: 2;
-  column-gap: 0.55rem;
-}
-
-.card-masonry :deep(.flash) {
-  break-inside: avoid;
-  margin: 0 0 0.55rem;
-}
-
-@media (min-width: 720px) {
-  .card-masonry {
-    column-count: 3;
-    column-gap: 0.65rem;
-  }
-}
-
-@media (min-width: 1100px) {
-  .card-masonry {
-    column-count: 4;
-  }
-}
 </style>
