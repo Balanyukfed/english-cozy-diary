@@ -36,7 +36,7 @@
       ],
       "mistake": "She going / I waiting",
       "section": "tenses",
-      "unlockedBy": "S10"
+      "unlockedBy": "S25"
     },
     {
       "id": "t-past-simple",
@@ -48,7 +48,19 @@
       ],
       "mistake": "I go yesterday / She goed",
       "section": "tenses",
-      "unlockedBy": "S19"
+      "unlockedBy": "S23"
+    },
+    {
+      "id": "t-going-to",
+      "title": "Going to / will (планы)",
+      "formula": "be going to + V · will + V  ·  завтра / later",
+      "examples": [
+        "I am going to take a taxi.",
+        "I will call you later."
+      ],
+      "mistake": "I going to / I will to go",
+      "section": "tenses",
+      "unlockedBy": "S28"
     },
     {
       "id": "t-word-order",
