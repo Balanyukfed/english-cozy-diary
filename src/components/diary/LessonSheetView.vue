@@ -1,31 +1,46 @@
 <script setup lang="ts">
-import type { LessonSheet } from '@/types'
+import { computed } from 'vue'
+import type { LessonSheet, SheetType } from '@/types'
 import SchemaTable from './SchemaTable.vue'
 import ExerciseCard from '@/components/exercises/ExerciseCard.vue'
 
-defineProps<{
+const props = defineProps<{
   sheet: LessonSheet
   lessonId: string
 }>()
 
-const typeLabel: Record<string, string> = {
-  cover: 'обложка',
-  review: 'повтор',
-  cold: 'холодная попытка',
-  explain: 'теория',
-  practice: 'практика',
-  voice: 'голос',
-  test: 'мини-тест',
-  vocab: 'слова',
-  hw: 'домашка',
+const meta: Record<
+  SheetType,
+  { label: string; kind: 'info' | 'practice'; hint: string }
+> = {
+  cover: { label: 'обложка', kind: 'info', hint: 'информация' },
+  review: { label: 'повтор', kind: 'practice', hint: 'практика' },
+  cold: { label: 'холодная попытка', kind: 'practice', hint: 'практика' },
+  explain: { label: 'теория', kind: 'info', hint: 'информация' },
+  practice: { label: 'практика', kind: 'practice', hint: 'практика' },
+  voice: { label: 'голос', kind: 'practice', hint: 'практика' },
+  test: { label: 'мини-тест', kind: 'practice', hint: 'практика' },
+  vocab: { label: 'слова', kind: 'practice', hint: 'практика' },
+  hw: { label: 'домашка', kind: 'practice', hint: 'практика' },
 }
+
+const sheetMeta = computed(() => meta[props.sheet.type] ?? {
+  label: props.sheet.type,
+  kind: 'practice' as const,
+  hint: 'практика',
+})
 </script>
 
 <template>
-  <article class="sheet">
+  <article class="sheet" :class="sheetMeta.kind === 'info' ? 'sheet--info' : 'sheet--practice'">
     <div class="sheet__margin" aria-hidden="true" />
     <div class="sheet__content">
-      <p class="sheet__type">{{ typeLabel[sheet.type] ?? sheet.type }}</p>
+      <div class="sheet__badges">
+        <span class="sheet__kind" :class="sheetMeta.kind === 'info' ? 'is-info' : 'is-practice'">
+          {{ sheetMeta.hint }}
+        </span>
+        <span class="sheet__type">{{ sheetMeta.label }}</span>
+      </div>
       <h2>{{ sheet.title }}</h2>
       <p v-if="sheet.body" class="sheet__body">{{ sheet.body }}</p>
 
@@ -63,6 +78,15 @@ const typeLabel: Record<string, string> = {
   position: relative;
   min-height: min(62vh, 560px);
   padding: 0.2rem 0.15rem 0.85rem;
+  border-radius: 14px;
+}
+
+.sheet--info {
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.55), transparent 42%);
+}
+
+.sheet--practice {
+  background: linear-gradient(180deg, rgba(95, 111, 94, 0.05), transparent 38%);
 }
 
 .sheet__margin {
@@ -71,8 +95,15 @@ const typeLabel: Record<string, string> = {
   top: 0.2rem;
   bottom: 0.2rem;
   width: 2px;
-  background: color-mix(in srgb, var(--margin-line) 70%, transparent);
   border-radius: 2px;
+}
+
+.sheet--info .sheet__margin {
+  background: color-mix(in srgb, var(--margin-line) 75%, transparent);
+}
+
+.sheet--practice .sheet__margin {
+  background: color-mix(in srgb, var(--ok) 55%, var(--margin-line));
 }
 
 .sheet__content {
@@ -80,12 +111,38 @@ const typeLabel: Record<string, string> = {
   text-align: left;
 }
 
+.sheet__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.sheet__kind {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.45rem;
+  border-radius: 999px;
+
+  &.is-info {
+    color: #7a5a52;
+    background: rgba(212, 163, 154, 0.28);
+  }
+
+  &.is-practice {
+    color: #3f5a3c;
+    background: rgba(90, 122, 85, 0.18);
+  }
+}
+
 .sheet__type {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--ink-soft);
-  margin: 0 0 0.15rem;
 }
 
 .sheet__content h2 {

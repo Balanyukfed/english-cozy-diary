@@ -190,17 +190,17 @@
         {
           "id": "s1-v1",
           "type": "speak",
-          "prompt": "Скажи: I want a ticket.",
+          "prompt": "Я хочу билет.",
           "payload": {
             "target": "I want a ticket"
           },
           "accepted": ["I want a ticket.", "I want a ticket"],
-          "explain": "Чётко: I / want / a ticket."
+          "explain": "I want a ticket."
         },
         {
           "id": "s1-v2",
           "type": "speak",
-          "prompt": "Скажи: She goes to the airport.",
+          "prompt": "Она едет в аэропорт.",
           "payload": {
             "target": "She goes to the airport"
           },
@@ -208,7 +208,7 @@
             "She goes to the airport.",
             "She goes to the airport"
           ],
-          "explain": "Не забудь звук -s в goes."
+          "explain": "She goes — с -s."
         }
       ]
     },
@@ -294,19 +294,65 @@
     {
       "id": "s1-vocab",
       "type": "vocab",
-      "title": "Слова урока",
-      "chips": [
-        "want",
-        "need",
-        "have",
-        "like",
-        "go / goes",
-        "ticket",
-        "airport",
-        "flight",
-        "help",
-        "luggage",
-        "beach"
+      "title": "Слова урока — проверка",
+      "body": "Переведи с русского на английский.",
+      "exercises": [
+        {
+          "id": "s1-w1",
+          "type": "translate",
+          "prompt": "хотеть",
+          "accepted": ["want", "Want", "to want"],
+          "explain": "want"
+        },
+        {
+          "id": "s1-w2",
+          "type": "translate",
+          "prompt": "нуждаться / нужно",
+          "accepted": ["need", "Need", "to need"],
+          "explain": "need"
+        },
+        {
+          "id": "s1-w3",
+          "type": "translate",
+          "prompt": "билет",
+          "accepted": ["ticket", "a ticket", "Ticket"],
+          "explain": "ticket"
+        },
+        {
+          "id": "s1-w4",
+          "type": "translate",
+          "prompt": "аэропорт",
+          "accepted": ["airport", "the airport", "Airport"],
+          "explain": "airport"
+        },
+        {
+          "id": "s1-w5",
+          "type": "translate",
+          "prompt": "рейс",
+          "accepted": ["flight", "a flight", "Flight"],
+          "explain": "flight"
+        },
+        {
+          "id": "s1-w6",
+          "type": "translate",
+          "prompt": "багаж",
+          "accepted": ["luggage", "Luggage", "baggage", "Baggage"],
+          "explain": "luggage (без a)"
+        },
+        {
+          "id": "s1-w7",
+          "type": "translate",
+          "prompt": "пляж",
+          "accepted": ["beach", "the beach", "Beach"],
+          "explain": "beach"
+        },
+        {
+          "id": "s1-w8",
+          "type": "translate",
+          "prompt": "помощь",
+          "accepted": ["help", "Help"],
+          "explain": "help (часто без a)"
+        }
       ]
     },
     {
@@ -397,10 +443,10 @@
         {
           "id": "s1-hw10",
           "type": "speak",
-          "prompt": "Скажи вслух",
+          "prompt": "Я хочу поехать в аэропорт.",
           "payload": { "target": "I want to go to the airport" },
           "accepted": ["I want to go to the airport.", "I want to go to the airport"],
-          "explain": "to the airport — не забудь the."
+          "explain": "to the airport — с the."
         },
         {
           "id": "s1-hw11",

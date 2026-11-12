@@ -8,33 +8,54 @@
       "id": "s2-cover",
       "type": "cover",
       "title": "Урок S2",
-      "body": "to be — am / is / are. Состояния, кто ты, где ты. Для Таиланда: I am a tourist. The hotel is near the beach.",
-      "pencilNotes": ["Скелет тот же: кто + am/is/are + что/где."]
+      "body": "to be = am / is / are.\nКто ты, где ты, какой отель, открыт ли магазин.\nДля Таиланда: I am a tourist. The room is clean. We are hungry.",
+      "pencilNotes": [
+        "Объём урока большой — не гонись за 5 минутами.",
+        "В каждом задании новая ситуация, не одна и та же фраза."
+      ]
     },
     {
       "id": "s2-review",
       "type": "review",
-      "title": "Повтор с S1",
-      "body": "Быстро: -s и артикли. Без длинной теории.",
+      "title": "Повтор с S1 (коротко)",
+      "body": "Другие ситуации, не копии S1.",
       "exercises": [
         {
           "id": "s2-r1",
           "type": "choice",
-          "prompt": "Выбери",
+          "prompt": "Выбери форму",
           "payload": {
-            "sentence": "She ___ a ticket.",
+            "sentence": "My sister ___ coffee every morning.",
             "options": ["want", "wants", "wanting"]
           },
           "answer": "wants",
-          "explain": "She → wants."
+          "explain": "sister = she → wants."
         },
         {
           "id": "s2-r2",
           "type": "fix",
           "prompt": "Исправь",
-          "payload": { "broken": "I go to airport." },
-          "accepted": ["I go to the airport.", "I go to the airport"],
-          "explain": "to the airport."
+          "payload": { "broken": "They need a luggage." },
+          "accepted": ["They need luggage.", "They need luggage"],
+          "explain": "luggage без a."
+        },
+        {
+          "id": "s2-r3",
+          "type": "translate",
+          "prompt": "Он идёт к гейту.",
+          "accepted": ["He goes to the gate.", "He goes to the gate"],
+          "explain": "He goes + to the gate."
+        },
+        {
+          "id": "s2-r4",
+          "type": "gap",
+          "prompt": "Артикль",
+          "payload": {
+            "sentence": "I like ___ Thai food.",
+            "options": ["a", "the", "—"]
+          },
+          "answer": "—",
+          "explain": "Thai food как категория — без a/the."
         }
       ]
     },
@@ -42,33 +63,57 @@
       "id": "s2-cold",
       "type": "cold",
       "title": "Холодная попытка",
-      "body": "Переведи как чувствуешь. Правило ещё не смотри.",
+      "body": "Переведи без подглядывания в теорию. Пять разных сцен.",
       "exercises": [
         {
           "id": "s2-c1",
           "type": "translate",
-          "prompt": "Я турист.",
-          "accepted": ["I am a tourist.", "I'm a tourist.", "I am a tourist", "I'm a tourist"],
-          "explain": "I am / I'm + a tourist."
+          "prompt": "Я устал.",
+          "accepted": ["I am tired.", "I'm tired.", "I am tired", "I'm tired"],
+          "explain": "I am / I'm tired."
         },
         {
           "id": "s2-c2",
           "type": "translate",
-          "prompt": "Отель рядом.",
+          "prompt": "Номер чистый.",
           "accepted": [
-            "The hotel is near.",
-            "The hotel is nearby.",
-            "The hotel is near",
-            "The hotel is nearby"
+            "The room is clean.",
+            "My room is clean.",
+            "The room is clean",
+            "My room is clean"
           ],
-          "explain": "The hotel is…"
+          "explain": "The/My room is clean."
         },
         {
           "id": "s2-c3",
           "type": "translate",
-          "prompt": "Мы в Бангкоке.",
-          "accepted": ["We are in Bangkok.", "We're in Bangkok.", "We are in Bangkok", "We're in Bangkok"],
-          "explain": "We are / We're + in Bangkok."
+          "prompt": "Мы голодные.",
+          "accepted": ["We are hungry.", "We're hungry.", "We are hungry", "We're hungry"],
+          "explain": "We are / We're hungry."
+        },
+        {
+          "id": "s2-c4",
+          "type": "translate",
+          "prompt": "Она в лобби.",
+          "accepted": [
+            "She is in the lobby.",
+            "She's in the lobby.",
+            "She is in the lobby",
+            "She's in the lobby"
+          ],
+          "explain": "She is / She's + in the lobby."
+        },
+        {
+          "id": "s2-c5",
+          "type": "translate",
+          "prompt": "Они из России.",
+          "accepted": [
+            "They are from Russia.",
+            "They're from Russia.",
+            "They are from Russia",
+            "They're from Russia"
+          ],
+          "explain": "They are from Russia."
         }
       ]
     },
@@ -76,33 +121,34 @@
       "id": "s2-explain",
       "type": "explain",
       "title": "am / is / are",
-      "body": "to be = «быть / являться / находиться». Форма зависит от кто.",
+      "body": "to be — «быть / являться / находиться». Форма зависит от кто. Это не want и не go.",
       "schema": {
         "caption": "I am · he/she/it is · you/we/they are",
-        "headers": ["Кто", "to be", "Пример"],
+        "headers": ["Кто", "Форма", "Сжатая", "Пример"],
         "rows": [
-          ["I", "am", "I am tired"],
-          ["he / she / it", "is", "She is at the hotel"],
-          ["you / we / they", "are", "We are in Thailand"]
+          ["I", "am", "I'm", "I am ready"],
+          ["he / she / it", "is", "he's / she's / it's", "The cafe is open"],
+          ["you / we / they", "are", "you're / we're / they're", "We are late"]
         ]
       },
       "pencilNotes": [
-        "I'm / she's / we're — короткие формы ок",
-        "Это не want/go — тут именно am/is/are"
+        "I'm / she's / we're — нормально в речи",
+        "it is → для вещей и мест: The pool is big.",
+        "После am/is/are: прилагательное, место, профессия, from…"
       ]
     },
     {
       "id": "s2-practice",
       "type": "practice",
       "title": "Практика",
-      "body": "Заполни и собери. Полный набор упражнений — на живом уроке.",
+      "body": "Каждое задание — новая сцена. Не копируй одну заготовку.",
       "exercises": [
         {
           "id": "s2-p1",
           "type": "gap",
           "prompt": "Вставь",
           "payload": {
-            "sentence": "I ___ ready.",
+            "sentence": "I ___ at the reception now.",
             "options": ["am", "is", "are"]
           },
           "answer": "am",
@@ -113,20 +159,546 @@
           "type": "gap",
           "prompt": "Вставь",
           "payload": {
-            "sentence": "The beach ___ beautiful.",
+            "sentence": "The pool ___ closed today.",
             "options": ["am", "is", "are"]
           },
           "answer": "is",
-          "explain": "it/the beach → is."
+          "explain": "the pool = it → is."
+        },
+        {
+          "id": "s2-p3",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "You ___ next to the elevator.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "are",
+          "explain": "you → are."
+        },
+        {
+          "id": "s2-p4",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": { "tokens": ["is", "The Wi-Fi", "free"] },
+          "accepted": ["The Wi-Fi is free", "the Wi-Fi is free"],
+          "explain": "The Wi-Fi is free."
+        },
+        {
+          "id": "s2-p5",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": { "tokens": ["are", "The towels", "in the bathroom"] },
+          "accepted": ["The towels are in the bathroom", "the towels are in the bathroom"],
+          "explain": "towels = they → are."
+        },
+        {
+          "id": "s2-p6",
+          "type": "translate",
+          "prompt": "Магазин открыт.",
+          "accepted": [
+            "The shop is open.",
+            "The store is open.",
+            "The shop is open",
+            "The store is open"
+          ],
+          "explain": "The shop/store is open."
+        },
+        {
+          "id": "s2-p7",
+          "type": "translate",
+          "prompt": "Такси дорогое.",
+          "accepted": [
+            "The taxi is expensive.",
+            "Taxi is expensive.",
+            "The taxi is expensive",
+            "Taxi is expensive"
+          ],
+          "explain": "The taxi is expensive."
+        },
+        {
+          "id": "s2-p8",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "She am at the beach." },
+          "accepted": [
+            "She is at the beach.",
+            "She's at the beach.",
+            "She is at the beach",
+            "She's at the beach"
+          ],
+          "explain": "She → is (не am)."
+        },
+        {
+          "id": "s2-p9",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "We is late for check-in." },
+          "accepted": [
+            "We are late for check-in.",
+            "We're late for check-in.",
+            "We are late for check-in",
+            "We're late for check-in"
+          ],
+          "explain": "We → are."
+        },
+        {
+          "id": "s2-p10",
+          "type": "choice",
+          "prompt": "Выбери",
+          "payload": {
+            "sentence": "This mango ___ sweet.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "is",
+          "explain": "this mango = it → is."
+        },
+        {
+          "id": "s2-p11",
+          "type": "translate",
+          "prompt": "Ключ на стойке.",
+          "accepted": [
+            "The key is at the desk.",
+            "The key is on the desk.",
+            "The key is at reception.",
+            "The key is at the desk",
+            "The key is on the desk",
+            "The key is at reception"
+          ],
+          "explain": "The key is + место."
+        },
+        {
+          "id": "s2-p12",
+          "type": "match",
+          "prompt": "Сопоставь форму",
+          "payload": {
+            "pairs": [
+              { "left": "I", "right": "am" },
+              { "left": "he / she / it", "right": "is" },
+              { "left": "you / we / they", "right": "are" },
+              { "left": "the hotel", "right": "is (как it)" }
+            ]
+          },
+          "explain": "the hotel считается как it → is."
+        }
+      ]
+    },
+    {
+      "id": "s2-voice",
+      "type": "voice",
+      "title": "Голос: с русского на английский",
+      "body": "Видишь русскую фразу — скажи (или напиши) английскую. Готовой английской строки нет.",
+      "exercises": [
+        {
+          "id": "s2-v1",
+          "type": "speak",
+          "prompt": "Я в отеле.",
+          "payload": { "target": "I am at the hotel" },
+          "accepted": [
+            "I am at the hotel.",
+            "I'm at the hotel.",
+            "I am in the hotel.",
+            "I'm in the hotel.",
+            "I am at the hotel",
+            "I'm at the hotel",
+            "I am in the hotel",
+            "I'm in the hotel"
+          ],
+          "explain": "I am / I'm at (or in) the hotel."
+        },
+        {
+          "id": "s2-v2",
+          "type": "speak",
+          "prompt": "Еда острая.",
+          "payload": { "target": "The food is spicy" },
+          "accepted": [
+            "The food is spicy.",
+            "Food is spicy.",
+            "The food is spicy",
+            "Food is spicy"
+          ],
+          "explain": "The food is spicy."
+        },
+        {
+          "id": "s2-v3",
+          "type": "speak",
+          "prompt": "Они на рынке.",
+          "payload": { "target": "They are at the market" },
+          "accepted": [
+            "They are at the market.",
+            "They're at the market.",
+            "They are at the market",
+            "They're at the market"
+          ],
+          "explain": "They are / They're at the market."
+        }
+      ]
+    },
+    {
+      "id": "s2-test",
+      "type": "test",
+      "title": "Мини-тест",
+      "body": "Порог ≥ 70% (минимум 6 из 8). Снова новые фразы.",
+      "exercises": [
+        {
+          "id": "s2-t1",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "The bathroom ___ small.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "is",
+          "explain": "bathroom → is."
+        },
+        {
+          "id": "s2-t2",
+          "type": "translate",
+          "prompt": "Я готов.",
+          "accepted": ["I am ready.", "I'm ready.", "I am ready", "I'm ready"],
+          "explain": "I am ready."
+        },
+        {
+          "id": "s2-t3",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "He are busy." },
+          "accepted": [
+            "He is busy.",
+            "He's busy.",
+            "He is busy",
+            "He's busy"
+          ],
+          "explain": "He → is."
+        },
+        {
+          "id": "s2-t4",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": { "tokens": ["are", "The bags", "heavy"] },
+          "accepted": ["The bags are heavy", "the bags are heavy"],
+          "explain": "bags → are."
+        },
+        {
+          "id": "s2-t5",
+          "type": "choice",
+          "prompt": "Выбери",
+          "payload": {
+            "sentence": "I ___ from Moscow.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "am",
+          "explain": "I am from…"
+        },
+        {
+          "id": "s2-t6",
+          "type": "translate",
+          "prompt": "Кондиционер громкий.",
+          "accepted": [
+            "The air conditioner is loud.",
+            "The AC is loud.",
+            "The aircon is loud.",
+            "The air conditioner is loud",
+            "The AC is loud",
+            "The aircon is loud"
+          ],
+          "explain": "The AC / air conditioner is loud."
+        },
+        {
+          "id": "s2-t7",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "We ___ on the second floor.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "are",
+          "explain": "We → are."
+        },
+        {
+          "id": "s2-t8",
+          "type": "translate",
+          "prompt": "Она врач.",
+          "accepted": [
+            "She is a doctor.",
+            "She's a doctor.",
+            "She is a doctor",
+            "She's a doctor"
+          ],
+          "explain": "She is a doctor."
+        }
+      ]
+    },
+    {
+      "id": "s2-vocab",
+      "type": "vocab",
+      "title": "Слова урока — проверка",
+      "body": "Не список на английском. Переведи с русского. Это практика.",
+      "exercises": [
+        {
+          "id": "s2-w1",
+          "type": "translate",
+          "prompt": "усталый",
+          "accepted": ["tired", "Tired"],
+          "explain": "tired"
+        },
+        {
+          "id": "s2-w2",
+          "type": "translate",
+          "prompt": "голодный",
+          "accepted": ["hungry", "Hungry"],
+          "explain": "hungry"
+        },
+        {
+          "id": "s2-w3",
+          "type": "translate",
+          "prompt": "открыт / открытый",
+          "accepted": ["open", "Open"],
+          "explain": "open"
+        },
+        {
+          "id": "s2-w4",
+          "type": "translate",
+          "prompt": "закрыт",
+          "accepted": ["closed", "Closed"],
+          "explain": "closed"
+        },
+        {
+          "id": "s2-w5",
+          "type": "translate",
+          "prompt": "чистый",
+          "accepted": ["clean", "Clean"],
+          "explain": "clean"
+        },
+        {
+          "id": "s2-w6",
+          "type": "translate",
+          "prompt": "лобби / холл отеля",
+          "accepted": ["lobby", "the lobby", "Lobby", "The lobby"],
+          "explain": "lobby"
+        },
+        {
+          "id": "s2-w7",
+          "type": "translate",
+          "prompt": "ресепшен / стойка регистрации",
+          "accepted": [
+            "reception",
+            "the reception",
+            "front desk",
+            "the front desk",
+            "Reception",
+            "Front desk"
+          ],
+          "explain": "reception / front desk"
+        },
+        {
+          "id": "s2-w8",
+          "type": "translate",
+          "prompt": "свободный (Wi‑Fi)",
+          "accepted": ["free", "Free"],
+          "explain": "free"
+        },
+        {
+          "id": "s2-w9",
+          "type": "translate",
+          "prompt": "дорогой",
+          "accepted": ["expensive", "Expensive"],
+          "explain": "expensive"
+        },
+        {
+          "id": "s2-w10",
+          "type": "translate",
+          "prompt": "из (страны): from …",
+          "accepted": ["from", "From"],
+          "explain": "from Russia / from Thailand"
         }
       ]
     },
     {
       "id": "s2-hw",
       "type": "hw",
-      "title": "ДЗ",
-      "body": "Появится после урока S2 (когда скажешь «урок прошли»).",
-      "pencilNotes": ["Пока можно листать теорию am/is/are."]
+      "title": "ДЗ — до следующего урока",
+      "body": "Много и по-разному. После каждого — Проверить. Заметки можно писать под заданием. В конце тетради: «Скопировать отчёт учителю» → в чат.",
+      "pencilNotes": [
+        "Duo 5 мин каждый день.",
+        "Карточки «повтор» тоже."
+      ],
+      "exercises": [
+        {
+          "id": "s2-hw1",
+          "type": "translate",
+          "prompt": "Я в Паттайе.",
+          "accepted": [
+            "I am in Pattaya.",
+            "I'm in Pattaya.",
+            "I am in Pattaya",
+            "I'm in Pattaya"
+          ],
+          "explain": "I am in Pattaya."
+        },
+        {
+          "id": "s2-hw2",
+          "type": "translate",
+          "prompt": "Лифт сломан.",
+          "accepted": [
+            "The elevator is broken.",
+            "The lift is broken.",
+            "The elevator is broken",
+            "The lift is broken"
+          ],
+          "explain": "The elevator/lift is broken."
+        },
+        {
+          "id": "s2-hw3",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "The night market ___ busy.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "is",
+          "explain": "market → is."
+        },
+        {
+          "id": "s2-hw4",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "I is near the 7-Eleven." },
+          "accepted": [
+            "I am near the 7-Eleven.",
+            "I'm near the 7-Eleven.",
+            "I am near the 7-Eleven",
+            "I'm near the 7-Eleven"
+          ],
+          "explain": "I → am."
+        },
+        {
+          "id": "s2-hw5",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": { "tokens": ["is", "The passport", "in my bag"] },
+          "accepted": ["The passport is in my bag", "the passport is in my bag"],
+          "explain": "The passport is in my bag."
+        },
+        {
+          "id": "s2-hw6",
+          "type": "translate",
+          "prompt": "Вода холодная.",
+          "accepted": [
+            "The water is cold.",
+            "Water is cold.",
+            "The water is cold",
+            "Water is cold"
+          ],
+          "explain": "The water is cold."
+        },
+        {
+          "id": "s2-hw7",
+          "type": "choice",
+          "prompt": "Выбери",
+          "payload": {
+            "sentence": "My friends ___ at the pier.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "are",
+          "explain": "friends → are."
+        },
+        {
+          "id": "s2-hw8",
+          "type": "translate",
+          "prompt": "Завтрак включён.",
+          "accepted": [
+            "Breakfast is included.",
+            "The breakfast is included.",
+            "Breakfast is included",
+            "The breakfast is included"
+          ],
+          "explain": "Breakfast is included."
+        },
+        {
+          "id": "s2-hw9",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "The beds is comfortable." },
+          "accepted": [
+            "The beds are comfortable.",
+            "The beds are comfortable"
+          ],
+          "explain": "beds → are."
+        },
+        {
+          "id": "s2-hw10",
+          "type": "speak",
+          "prompt": "Я туриста. (Исправь смысл: Я турист.)",
+          "payload": { "target": "I am a tourist" },
+          "accepted": [
+            "I am a tourist.",
+            "I'm a tourist.",
+            "I am a tourist",
+            "I'm a tourist"
+          ],
+          "explain": "I am a tourist."
+        },
+        {
+          "id": "s2-hw11",
+          "type": "translate",
+          "prompt": "Аптека далеко.",
+          "accepted": [
+            "The pharmacy is far.",
+            "The pharmacy is far away.",
+            "The drugstore is far.",
+            "The pharmacy is far",
+            "The pharmacy is far away",
+            "The drugstore is far"
+          ],
+          "explain": "The pharmacy is far (away)."
+        },
+        {
+          "id": "s2-hw12",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "It ___ hot in April.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "is",
+          "explain": "It is hot…"
+        },
+        {
+          "id": "s2-hw13",
+          "type": "order",
+          "prompt": "Собери",
+          "payload": { "tokens": ["are", "You", "on time"] },
+          "accepted": ["You are on time", "you are on time"],
+          "explain": "You are on time."
+        },
+        {
+          "id": "s2-hw14",
+          "type": "match",
+          "prompt": "Сопоставь",
+          "payload": {
+            "pairs": [
+              { "left": "tired", "right": "усталый" },
+              { "left": "spicy", "right": "острый" },
+              { "left": "included", "right": "включён" },
+              { "left": "broken", "right": "сломан" }
+            ]
+          },
+          "explain": "Слова из отеля и еды."
+        },
+        {
+          "id": "s2-hw15",
+          "type": "translate",
+          "prompt": "Мы на втором этаже.",
+          "accepted": [
+            "We are on the second floor.",
+            "We're on the second floor.",
+            "We are on the second floor",
+            "We're on the second floor"
+          ],
+          "explain": "We are on the second floor."
+        }
+      ]
     }
   ]
 }

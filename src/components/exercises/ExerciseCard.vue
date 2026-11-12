@@ -9,7 +9,7 @@ const props = defineProps<{
   lessonId: string
 }>()
 
-const { get, setValue, setResult, toggleReveal } = useAnswers(props.lessonId)
+const { get, setValue, setResult, setNote, toggleReveal } = useAnswers(props.lessonId)
 const state = computed(() => get(props.exercise.id))
 const {
   listening: speechListening,
@@ -26,6 +26,8 @@ const matchLeft = ref<string | null>(null)
 const matchPairs = ref<Record<string, string>>({})
 const matchRights = ref<string[]>([])
 const speakText = ref('')
+const noteText = ref('')
+const teacherReply = ref('')
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -62,10 +64,30 @@ function matchSideClass(side: 'left' | 'right', text: string) {
   return classes.join(' ')
 }
 
+async function loadTeacherReply() {
+  teacherReply.value = ''
+  try {
+    const base = import.meta.env.BASE_URL
+    const res = await fetch(`${base}data/replies.json`)
+    if (!res.ok) return
+    const data = (await res.json()) as {
+      items?: { lessonId: string; exerciseId: string; answer: string }[]
+    }
+    const hit = data.items?.find(
+      (i) => i.lessonId === props.lessonId && i.exerciseId === props.exercise.id,
+    )
+    teacherReply.value = hit?.answer ?? ''
+  } catch {
+    teacherReply.value = ''
+  }
+}
+
 function initFromState() {
   const v = state.value.value
   const ex = props.exercise
   matchLeft.value = null
+  noteText.value = state.value.note ?? ''
+  void loadTeacherReply()
 
   if (ex.type === 'gap' || ex.type === 'choice') {
     gapChoice.value = typeof v === 'string' ? v : ''
@@ -345,9 +367,9 @@ const fieldTone = computed(() => {
       </div>
     </div>
 
-    <!-- speak -->
+    <!-- speak: Russian prompt → say/write English (no English shown until solution) -->
     <div v-else-if="exercise.type === 'speak'" class="exercise__body">
-      <p class="speak-target">{{ exercise.payload?.target }}</p>
+      <p class="speak-cue">Скажи по-английски (или напиши):</p>
       <div class="speak-actions">
         <button
           type="button"
@@ -367,7 +389,7 @@ const fieldTone = computed(() => {
         autocapitalize="sentences"
         autocomplete="off"
         spellcheck="false"
-        placeholder="What you said…"
+        placeholder="English…"
         @input="setValue(exercise.id, speakText)"
       />
     </div>
@@ -382,12 +404,31 @@ const fieldTone = computed(() => {
       >
         {{ state.revealed ? 'Скрыть решение' : 'Решение' }}
       </button>
+      <span v-if="state.errors?.length" class="error-count" title="Ошибки сохранены">
+        ошибок в логе: {{ state.errors.length }}
+      </span>
     </footer>
 
     <div v-if="state.revealed" class="solution">
       <p class="solution__answer">{{ solutionText }}</p>
       <p class="note-pencil">{{ exercise.explain }}</p>
     </div>
+
+    <label class="note-box">
+      <span class="note-box__label">Заметка / вопрос учителю</span>
+      <textarea
+        v-model="noteText"
+        class="note-box__field"
+        rows="2"
+        placeholder="Необязательно — увижу в отчёте после «урок прошли»"
+        @input="setNote(exercise.id, noteText)"
+      />
+    </label>
+
+    <aside v-if="teacherReply" class="teacher-reply">
+      <p class="teacher-reply__label">Ответ учителя</p>
+      <p class="teacher-reply__text">{{ teacherReply }}</p>
+    </aside>
   </article>
 </template>
 
@@ -607,15 +648,72 @@ const fieldTone = computed(() => {
   text-align: left;
 }
 
-.speak-target {
-  font-family: var(--font-display);
-  font-weight: 600;
-  margin: 0 0 0.55rem;
-  text-align: left;
+.speak-cue {
+  margin: 0 0 0.45rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
 }
 
 .speak-actions {
   margin-bottom: 0.55rem;
+}
+
+.error-count {
+  align-self: center;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.note-box {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+.note-box__label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.note-box__field {
+  width: 100%;
+  resize: vertical;
+  min-height: 56px;
+  border-radius: 10px;
+  border: 1px dashed rgba(201, 184, 168, 0.9);
+  background: rgba(255, 252, 245, 0.55);
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+  line-height: 1.4;
+  outline: none;
+}
+
+.note-box__field:focus {
+  border-style: solid;
+  border-color: var(--accent);
+}
+
+.teacher-reply {
+  margin-top: 0.55rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  background: rgba(95, 111, 94, 0.08);
+  border: 1px solid rgba(95, 111, 94, 0.18);
+}
+
+.teacher-reply__label {
+  margin: 0 0 0.2rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.teacher-reply__text {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.45;
 }
 
 .is-bad-text {

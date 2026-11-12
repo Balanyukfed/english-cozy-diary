@@ -3,6 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useData } from '@/composables/useData'
 import { usePageTurn } from '@/composables/usePageTurn'
+import { buildTeacherReport } from '@/composables/useAnswers'
 import LessonSheetView from '@/components/diary/LessonSheetView.vue'
 import type { Lesson } from '@/types'
 
@@ -57,6 +58,23 @@ const sheet = computed(() => current.value?.sheets[sheetIndex.value] ?? null)
 const allSprintLessons = computed(
   () => sprint.value?.flatMap((b) => b.lessons) ?? [],
 )
+
+const reportStatus = ref('')
+
+async function copyTeacherReport() {
+  if (!current.value) return
+  const text = buildTeacherReport(current.value)
+  try {
+    await navigator.clipboard.writeText(text)
+    reportStatus.value = 'Отчёт скопирован — вставь в чат'
+  } catch {
+    reportStatus.value = 'Не удалось скопировать — выдели текст вручную'
+    window.prompt('Скопируй отчёт:', text)
+  }
+  window.setTimeout(() => {
+    reportStatus.value = ''
+  }, 3500)
+}
 </script>
 
 <template>
@@ -107,6 +125,16 @@ const allSprintLessons = computed(
       <button type="button" class="btn btn--ghost" :disabled="!canNext" @click="next">
         Вперёд ›
       </button>
+    </div>
+
+    <div class="report no-swipe">
+      <button type="button" class="btn btn--soft btn--report" @click="copyTeacherReport">
+        Скопировать отчёт учителю
+      </button>
+      <p class="report__hint">
+        Ошибки (даже исправленные) + твои заметки. После «урок прошли» / «дз сделал» — вставь в чат.
+      </p>
+      <p v-if="reportStatus" class="report__status">{{ reportStatus }}</p>
     </div>
   </section>
 </template>
@@ -169,6 +197,32 @@ const allSprintLessons = computed(
 
 .pager__n {
   color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.report {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed rgba(201, 184, 168, 0.65);
+}
+
+.btn--report {
+  min-height: 40px;
+  padding: 0.5rem 0.95rem;
+  font-size: 0.9rem;
+}
+
+.report__hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.report__status {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ok);
   font-weight: 600;
 }
 
