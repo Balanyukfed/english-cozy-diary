@@ -8,7 +8,7 @@ import type { Lesson } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
-const { loadCore, loadLesson, listOpenLessons, sprint } = useData()
+const { loadCore, loadLesson, listOpenLessons, sprint, meta } = useData()
 
 const lessons = ref<Lesson[]>([])
 const lessonId = ref('S1')
@@ -30,8 +30,10 @@ const bookEl = ref<HTMLElement | null>(null)
 onMounted(async () => {
   await loadCore()
   lessons.value = await listOpenLessons()
-  const q = String(route.query.lesson || 'S1')
-  lessonId.value = lessons.value.some((l) => l.id === q) ? q : lessons.value[0]?.id ?? 'S1'
+  const preferred = String(route.query.lesson || meta.value?.nextLessonId || 'S1')
+  lessonId.value = lessons.value.some((l) => l.id === preferred)
+    ? preferred
+    : lessons.value.find((l) => l.status === 'current')?.id ?? lessons.value[0]?.id ?? 'S1'
   const lesson = await loadLesson(lessonId.value)
   if (lesson && !lessons.value.find((l) => l.id === lesson.id)) {
     lessons.value.push(lesson)
@@ -71,9 +73,9 @@ const allSprintLessons = computed(
         class="toc__item"
         :class="{
           'is-active': l.id === lessonId,
-          'is-locked': l.status === 'todo' && l.id !== 'S1',
+          'is-locked': l.status === 'todo',
         }"
-        :disabled="l.status === 'todo' && l.id !== 'S1' && !lessons.find((x) => x.id === l.id)"
+        :disabled="l.status === 'todo'"
         @click="lessonId = l.id"
       >
         {{ l.id }}
@@ -118,8 +120,13 @@ const allSprintLessons = computed(
   display: flex;
   gap: 0.4rem;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.75rem;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.65rem;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .toc__item {

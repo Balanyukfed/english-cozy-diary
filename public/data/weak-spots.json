@@ -4,15 +4,15 @@
       "id": "ws1",
       "priority": "high",
       "topic": "he / she / it + -s",
-      "why": "Частые ошибки: she go, he want",
-      "plan": "Повтор в каждом уроке блока A"
+      "why": "S1 прогнали; ещё не автомат (she go / he want)",
+      "plan": "Короткий повтор в каждом уроке блока A"
     },
     {
       "id": "ws2",
       "priority": "high",
       "topic": "Артикли a / the / ∅",
-      "why": "a Thailand, a help, a food",
-      "plan": "Правило «можно посчитать?» + места с the"
+      "why": "S1: Thailand / help / food / Thai food — держать",
+      "plan": "Якоря + практика до S6"
     },
     {
       "id": "ws3",

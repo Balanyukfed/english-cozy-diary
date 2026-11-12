@@ -41,6 +41,8 @@ defineProps<{ schema: SchemaTable }>()
 
 .schema__scroll {
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(160, 140, 120, 0.3) transparent;
 }
 
 table {

@@ -1,7 +1,7 @@
 {
   "name": "English Cozy Diary",
   "deadline": "10 января 2027",
-  "progressLessons": 0,
+  "progressLessons": 1,
   "totalLessons": 33,
-  "nextLessonId": "S1"
+  "nextLessonId": "S2"
 }

@@ -69,6 +69,31 @@
           "en": "passport",
           "ru": "паспорт",
           "example": "I need my passport."
+        },
+        {
+          "id": "v11",
+          "en": "boarding pass",
+          "ru": "посадочный",
+          "example": "Where is my boarding pass?"
+        },
+        {
+          "id": "v12",
+          "en": "gate",
+          "ru": "выход на посадку",
+          "example": "The gate is number 12."
+        },
+        {
+          "id": "v13",
+          "en": "suitcase",
+          "ru": "чемодан",
+          "example": "I have one suitcase."
+        },
+        {
+          "id": "v14",
+          "en": "She has a ticket",
+          "ru": "У неё есть билет",
+          "example": "She has a ticket for the flight.",
+          "warn": true
         }
       ]
     }

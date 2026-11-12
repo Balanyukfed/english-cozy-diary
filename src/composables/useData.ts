@@ -57,13 +57,12 @@ export function useData() {
   function availableLessonIds(): string[] {
     if (!sprint.value) return []
     return sprint.value.flatMap((b) =>
-      b.lessons.filter((l) => l.status !== 'todo' || l.id === 'S1').map((l) => l.id),
+      b.lessons.filter((l) => l.status !== 'todo').map((l) => l.id),
     )
   }
 
-  /** Lessons that have JSON files — for now S1; expand as files appear */
   async function listOpenLessons(): Promise<Lesson[]> {
-    const ids = ['S1']
+    const ids = availableLessonIds()
     const result: Lesson[] = []
     for (const id of ids) {
       const l = await loadLesson(id)

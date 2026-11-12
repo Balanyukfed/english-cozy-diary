@@ -1,0 +1,132 @@
+{
+  "id": "S2",
+  "title": "to be: am / is / are",
+  "date": "",
+  "status": "current",
+  "sheets": [
+    {
+      "id": "s2-cover",
+      "type": "cover",
+      "title": "Урок S2",
+      "body": "to be — am / is / are. Состояния, кто ты, где ты. Для Таиланда: I am a tourist. The hotel is near the beach.",
+      "pencilNotes": ["Скелет тот же: кто + am/is/are + что/где."]
+    },
+    {
+      "id": "s2-review",
+      "type": "review",
+      "title": "Повтор с S1",
+      "body": "Быстро: -s и артикли. Без длинной теории.",
+      "exercises": [
+        {
+          "id": "s2-r1",
+          "type": "choice",
+          "prompt": "Выбери",
+          "payload": {
+            "sentence": "She ___ a ticket.",
+            "options": ["want", "wants", "wanting"]
+          },
+          "answer": "wants",
+          "explain": "She → wants."
+        },
+        {
+          "id": "s2-r2",
+          "type": "fix",
+          "prompt": "Исправь",
+          "payload": { "broken": "I go to airport." },
+          "accepted": ["I go to the airport.", "I go to the airport"],
+          "explain": "to the airport."
+        }
+      ]
+    },
+    {
+      "id": "s2-cold",
+      "type": "cold",
+      "title": "Холодная попытка",
+      "body": "Переведи как чувствуешь. Правило ещё не смотри.",
+      "exercises": [
+        {
+          "id": "s2-c1",
+          "type": "translate",
+          "prompt": "Я турист.",
+          "accepted": ["I am a tourist.", "I'm a tourist.", "I am a tourist", "I'm a tourist"],
+          "explain": "I am / I'm + a tourist."
+        },
+        {
+          "id": "s2-c2",
+          "type": "translate",
+          "prompt": "Отель рядом.",
+          "accepted": [
+            "The hotel is near.",
+            "The hotel is nearby.",
+            "The hotel is near",
+            "The hotel is nearby"
+          ],
+          "explain": "The hotel is…"
+        },
+        {
+          "id": "s2-c3",
+          "type": "translate",
+          "prompt": "Мы в Бангкоке.",
+          "accepted": ["We are in Bangkok.", "We're in Bangkok.", "We are in Bangkok", "We're in Bangkok"],
+          "explain": "We are / We're + in Bangkok."
+        }
+      ]
+    },
+    {
+      "id": "s2-explain",
+      "type": "explain",
+      "title": "am / is / are",
+      "body": "to be = «быть / являться / находиться». Форма зависит от кто.",
+      "schema": {
+        "caption": "I am · he/she/it is · you/we/they are",
+        "headers": ["Кто", "to be", "Пример"],
+        "rows": [
+          ["I", "am", "I am tired"],
+          ["he / she / it", "is", "She is at the hotel"],
+          ["you / we / they", "are", "We are in Thailand"]
+        ]
+      },
+      "pencilNotes": [
+        "I'm / she's / we're — короткие формы ок",
+        "Это не want/go — тут именно am/is/are"
+      ]
+    },
+    {
+      "id": "s2-practice",
+      "type": "practice",
+      "title": "Практика",
+      "body": "Заполни и собери. Полный набор упражнений — на живом уроке.",
+      "exercises": [
+        {
+          "id": "s2-p1",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "I ___ ready.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "am",
+          "explain": "I → am."
+        },
+        {
+          "id": "s2-p2",
+          "type": "gap",
+          "prompt": "Вставь",
+          "payload": {
+            "sentence": "The beach ___ beautiful.",
+            "options": ["am", "is", "are"]
+          },
+          "answer": "is",
+          "explain": "it/the beach → is."
+        }
+      ]
+    },
+    {
+      "id": "s2-hw",
+      "type": "hw",
+      "title": "ДЗ",
+      "body": "Появится после урока S2 (когда скажешь «урок прошли»).",
+      "pencilNotes": ["Пока можно листать теорию am/is/are."]
+    }
+  ]
+}

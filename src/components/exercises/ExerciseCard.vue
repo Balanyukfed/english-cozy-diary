@@ -9,7 +9,7 @@ const props = defineProps<{
   lessonId: string
 }>()
 
-const { get, setValue, setResult, reveal } = useAnswers(props.lessonId)
+const { get, setValue, setResult, toggleReveal } = useAnswers(props.lessonId)
 const state = computed(() => get(props.exercise.id))
 const {
   listening: speechListening,
@@ -24,6 +24,7 @@ const orderSelected = ref<string[]>([])
 const orderPool = ref<string[]>([])
 const matchLeft = ref<string | null>(null)
 const matchPairs = ref<Record<string, string>>({})
+const matchRights = ref<string[]>([])
 const speakText = ref('')
 
 function shuffle<T>(arr: T[]): T[] {
@@ -35,9 +36,37 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
+function rightOwner(right: string): string | null {
+  const hit = Object.entries(matchPairs.value).find(([, r]) => r === right)
+  return hit?.[0] ?? null
+}
+
+function expectedRight(left: string): string | undefined {
+  return props.exercise.payload?.pairs?.find((p) => p.left === left)?.right
+}
+
+function matchSideClass(side: 'left' | 'right', text: string) {
+  const paired =
+    side === 'left' ? !!matchPairs.value[text] : !!rightOwner(text)
+  const selected = side === 'left' && matchLeft.value === text
+  const classes: string[] = []
+  if (selected) classes.push('is-picked')
+  else if (paired) classes.push('is-linked')
+
+  if (state.value.checked && paired) {
+    const left = side === 'left' ? text : rightOwner(text)
+    if (!left) return classes.join(' ')
+    const ok = matchPairs.value[left] === expectedRight(left)
+    classes.push(ok ? 'is-ok' : 'is-bad')
+  }
+  return classes.join(' ')
+}
+
 function initFromState() {
   const v = state.value.value
   const ex = props.exercise
+  matchLeft.value = null
+
   if (ex.type === 'gap' || ex.type === 'choice') {
     gapChoice.value = typeof v === 'string' ? v : ''
   } else if (ex.type === 'translate') {
@@ -48,8 +77,6 @@ function initFromState() {
     const tokens = ex.payload?.tokens ?? []
     if (Array.isArray(v) && v.length) {
       orderSelected.value = v as string[]
-      orderPool.value = tokens.filter((t) => !(v as string[]).includes(t))
-      // handle duplicates carefully
       const used = [...(v as string[])]
       orderPool.value = []
       for (const t of shuffle(tokens)) {
@@ -62,7 +89,9 @@ function initFromState() {
       orderPool.value = shuffle(tokens)
     }
   } else if (ex.type === 'match') {
+    const pairs = ex.payload?.pairs ?? []
     matchPairs.value = (v as Record<string, string>) || {}
+    matchRights.value = shuffle(pairs.map((p) => p.right))
   } else if (ex.type === 'speak') {
     speakText.value = typeof v === 'string' ? v : ''
   }
@@ -105,8 +134,8 @@ function check() {
   setResult(ex.id, ok)
 }
 
-function onReveal() {
-  reveal(props.exercise.id)
+function onToggleSolution() {
+  toggleReveal(props.exercise.id)
 }
 
 function pickOrder(token: string, fromPool: boolean) {
@@ -129,13 +158,34 @@ function pickOrder(token: string, fromPool: boolean) {
 
 function onMatchClick(side: 'left' | 'right', text: string) {
   if (side === 'left') {
-    matchLeft.value = text
+    if (matchPairs.value[text]) {
+      const next = { ...matchPairs.value }
+      delete next[text]
+      matchPairs.value = next
+      matchLeft.value = null
+      setValue(props.exercise.id, { ...next })
+      return
+    }
+    matchLeft.value = matchLeft.value === text ? null : text
+    return
+  }
+
+  const owner = rightOwner(text)
+  if (owner && !matchLeft.value) {
+    const next = { ...matchPairs.value }
+    delete next[owner]
+    matchPairs.value = next
+    setValue(props.exercise.id, { ...next })
     return
   }
   if (!matchLeft.value) return
-  matchPairs.value = { ...matchPairs.value, [matchLeft.value]: text }
+
+  const next = { ...matchPairs.value }
+  if (owner) delete next[owner]
+  next[matchLeft.value] = text
+  matchPairs.value = next
   matchLeft.value = null
-  setValue(props.exercise.id, { ...matchPairs.value })
+  setValue(props.exercise.id, { ...next })
 }
 
 async function startMic() {
@@ -154,30 +204,30 @@ const solutionText = computed(() => {
   if (ex.accepted?.length) return ex.accepted[0]
   if (ex.type === 'order') return (ex.accepted?.[0] ?? '').toString()
   if (ex.type === 'match') {
-    return (ex.payload?.pairs ?? []).map((p) => `${p.left} → ${p.right}`).join(' · ')
+    return (ex.payload?.pairs ?? []).map((p) => `${p.left} — ${p.right}`).join('\n')
   }
   if (ex.type === 'speak') return ex.payload?.target ?? ex.accepted?.[0] ?? ''
   return ''
 })
 
-const statusLabel = computed(() => {
+const fieldTone = computed(() => {
   if (!state.value.checked) return ''
-  return state.value.correct ? 'Верно' : 'Пока неверно'
+  return state.value.correct ? 'is-ok' : 'is-bad'
 })
 </script>
 
 <template>
-  <article class="exercise no-swipe" :data-type="exercise.type">
+  <article
+    class="exercise no-swipe"
+    :data-type="exercise.type"
+    :class="{
+      'is-ok': state.checked && state.correct,
+      'is-bad': state.checked && !state.correct,
+    }"
+  >
     <header class="exercise__head">
       <p class="exercise__prompt">{{ exercise.prompt }}</p>
       <p v-if="exercise.hint" class="hint">{{ exercise.hint }}</p>
-      <p
-        v-if="state.checked"
-        class="exercise__status"
-        :class="state.correct ? 'is-ok' : 'is-bad'"
-      >
-        {{ statusLabel }}
-      </p>
     </header>
 
     <!-- gap / choice -->
@@ -201,7 +251,7 @@ const statusLabel = computed(() => {
             setValue(exercise.id, opt);
           "
         >
-          {{ opt === '—' ? '∅ (ничего)' : opt }}
+          {{ opt === '—' ? '∅' : opt }}
         </button>
       </div>
     </div>
@@ -211,6 +261,7 @@ const statusLabel = computed(() => {
       <input
         v-model="translateText"
         class="field"
+        :class="fieldTone"
         lang="en"
         autocapitalize="sentences"
         autocomplete="off"
@@ -226,6 +277,7 @@ const statusLabel = computed(() => {
       <input
         v-model="fixText"
         class="field"
+        :class="fieldTone"
         lang="en"
         autocapitalize="sentences"
         autocomplete="off"
@@ -237,7 +289,7 @@ const statusLabel = computed(() => {
 
     <!-- order -->
     <div v-else-if="exercise.type === 'order'" class="exercise__body">
-      <div class="order-line">
+      <div class="order-line" :class="fieldTone">
         <button
           v-for="(t, i) in orderSelected"
           :key="'s' + i + t"
@@ -247,6 +299,7 @@ const statusLabel = computed(() => {
         >
           {{ t }}
         </button>
+        <span v-if="!orderSelected.length" class="order-line__hint">собери сюда</span>
       </div>
       <div class="options">
         <button
@@ -263,29 +316,32 @@ const statusLabel = computed(() => {
 
     <!-- match -->
     <div v-else-if="exercise.type === 'match'" class="exercise__body match">
-      <div class="match__col">
-        <button
-          v-for="p in exercise.payload?.pairs ?? []"
-          :key="'l' + p.left"
-          type="button"
-          class="chip"
-          :class="{ 'is-picked': matchLeft === p.left, 'is-ok': !!matchPairs[p.left] }"
-          @click="onMatchClick('left', p.left)"
-        >
-          {{ p.left }}
-          <small v-if="matchPairs[p.left]">→ {{ matchPairs[p.left] }}</small>
-        </button>
-      </div>
-      <div class="match__col">
-        <button
-          v-for="p in exercise.payload?.pairs ?? []"
-          :key="'r' + p.right"
-          type="button"
-          class="chip"
-          @click="onMatchClick('right', p.right)"
-        >
-          {{ p.right }}
-        </button>
+      <p class="match__hint">Сначала слово слева, потом перевод справа. Ещё раз по паре — снять.</p>
+      <div class="match__board">
+        <div class="match__col">
+          <button
+            v-for="p in exercise.payload?.pairs ?? []"
+            :key="'l' + p.left"
+            type="button"
+            class="match__item"
+            :class="matchSideClass('left', p.left)"
+            @click="onMatchClick('left', p.left)"
+          >
+            {{ p.left }}
+          </button>
+        </div>
+        <div class="match__col">
+          <button
+            v-for="right in matchRights"
+            :key="'r' + right"
+            type="button"
+            class="match__item"
+            :class="matchSideClass('right', right)"
+            @click="onMatchClick('right', right)"
+          >
+            {{ right }}
+          </button>
+        </div>
       </div>
     </div>
 
@@ -295,17 +351,18 @@ const statusLabel = computed(() => {
       <div class="speak-actions">
         <button
           type="button"
-          class="btn"
+          class="btn btn--soft"
           :disabled="speechListening"
           @click="startMic"
         >
-          {{ speechListening ? '…' : '🎤' }}
+          {{ speechListening ? '…' : 'Микрофон' }}
         </button>
       </div>
-      <p v-if="speechError" class="hint is-bad-text">Микрофон не сработал — напиши или надиктуй в поле.</p>
+      <p v-if="speechError" class="hint is-bad-text">Микрофон не сработал — напиши ниже.</p>
       <input
         v-model="speakText"
         class="field"
+        :class="fieldTone"
         lang="en"
         autocapitalize="sentences"
         autocomplete="off"
@@ -316,19 +373,19 @@ const statusLabel = computed(() => {
     </div>
 
     <footer class="exercise__footer">
-      <button type="button" class="btn" @click="check">Проверить</button>
+      <button type="button" class="btn btn--sm" @click="check">Проверить</button>
       <button
         type="button"
-        class="btn btn--ghost"
+        class="btn btn--ghost btn--sm"
         :disabled="!state.checked && !state.revealed"
-        @click="onReveal"
+        @click="onToggleSolution"
       >
-        Показать решение
+        {{ state.revealed ? 'Скрыть решение' : 'Решение' }}
       </button>
     </footer>
 
     <div v-if="state.revealed" class="solution">
-      <p><strong>Решение:</strong> {{ solutionText }}</p>
+      <p class="solution__answer">{{ solutionText }}</p>
       <p class="note-pencil">{{ exercise.explain }}</p>
     </div>
   </article>
@@ -336,77 +393,107 @@ const statusLabel = computed(() => {
 
 <style scoped lang="scss">
 .exercise {
-  padding: 1rem 0 1.25rem;
-  border-bottom: 1px dashed rgba(201, 184, 168, 0.7);
+  position: relative;
+  padding: 0.95rem 0 1.05rem 0.85rem;
+  border-bottom: 1px dashed rgba(201, 184, 168, 0.55);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.95rem;
+    bottom: 1.05rem;
+    width: 2px;
+    border-radius: 2px;
+    background: transparent;
+    transition: background 0.15s ease;
+  }
 
   &:last-child {
     border-bottom: none;
+  }
+
+  &.is-ok::before {
+    background: color-mix(in srgb, var(--ok) 70%, transparent);
+  }
+
+  &.is-bad::before {
+    background: color-mix(in srgb, var(--bad) 70%, transparent);
   }
 }
 
 .exercise__prompt {
   font-weight: 600;
-  margin-bottom: 0.35rem;
+  margin: 0 0 0.2rem;
+  text-align: left;
+  line-height: 1.35;
 }
 
-.exercise__status {
-  display: inline-block;
-  margin: 0.35rem 0 0;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
+.hint {
+  margin: 0 0 0.45rem;
+  text-align: left;
+}
 
-  &.is-ok {
-    background: var(--ok-bg);
-    color: var(--ok);
-  }
-
-  &.is-bad {
-    background: var(--bad-bg);
-    color: var(--bad);
-  }
+.exercise__body {
+  margin-top: 0.55rem;
 }
 
 .exercise__sentence,
 .exercise__broken {
   font-family: var(--font-display);
-  margin-bottom: 0.75rem;
+  margin: 0 0 0.65rem;
+  text-align: left;
+  line-height: 1.4;
 }
 
 .exercise__broken {
-  text-decoration: underline wavy rgba(138, 79, 69, 0.5);
+  text-decoration: underline wavy rgba(138, 79, 69, 0.45);
+  text-underline-offset: 0.2em;
 }
 
-.options,
-.order-line,
-.match__col {
+.options {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: 0.45rem;
 }
 
 .order-line {
-  min-height: 52px;
-  padding: 0.5rem;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.35);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 48px;
+  margin-bottom: 0.55rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.28);
   border: 1px dashed var(--stitch);
+
+  &.is-ok {
+    border-color: color-mix(in srgb, var(--ok) 55%, var(--stitch));
+    background: var(--ok-bg);
+  }
+
+  &.is-bad {
+    border-color: color-mix(in srgb, var(--bad) 45%, var(--stitch));
+    background: var(--bad-bg);
+  }
+}
+
+.order-line__hint {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
 }
 
 .chip {
-  min-height: 44px;
-  padding: 0.45rem 0.85rem;
+  min-height: 40px;
+  padding: 0.4rem 0.8rem;
   border-radius: 999px;
   border: 1px solid rgba(201, 184, 168, 0.85);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.45);
   cursor: pointer;
-
-  small {
-    display: block;
-    color: var(--ink-soft);
-  }
+  text-align: center;
+  line-height: 1.2;
 
   &.is-picked {
     border-color: var(--accent);
@@ -414,44 +501,121 @@ const statusLabel = computed(() => {
   }
 
   &.is-ok {
-    border-color: var(--ok);
+    border-color: color-mix(in srgb, var(--ok) 65%, transparent);
     background: var(--ok-bg);
   }
 
   &.is-bad {
-    border-color: var(--bad);
+    border-color: color-mix(in srgb, var(--bad) 55%, transparent);
     background: var(--bad-bg);
   }
 }
 
-.match {
+.field.is-ok {
+  border-color: color-mix(in srgb, var(--ok) 55%, transparent);
+  background: var(--ok-bg);
+  box-shadow: none;
+}
+
+.field.is-bad {
+  border-color: color-mix(in srgb, var(--bad) 50%, transparent);
+  background: var(--bad-bg);
+  box-shadow: none;
+}
+
+.match__hint {
+  margin: 0 0 0.55rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+.match__board {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 0.55rem 0.75rem;
+  align-items: start;
+}
+
+.match__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.match__item {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.7rem;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 184, 168, 0.8);
+  background: rgba(255, 255, 255, 0.42);
+  text-align: left;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+
+  &.is-picked {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  &.is-linked {
+    border-color: color-mix(in srgb, var(--accent) 40%, rgba(201, 184, 168, 0.8));
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+
+  &.is-ok {
+    border-color: color-mix(in srgb, var(--ok) 50%, transparent);
+    background: var(--ok-bg);
+    box-shadow: inset 3px 0 0 color-mix(in srgb, var(--ok) 65%, transparent);
+  }
+
+  &.is-bad {
+    border-color: color-mix(in srgb, var(--bad) 45%, transparent);
+    background: var(--bad-bg);
+    box-shadow: inset 3px 0 0 color-mix(in srgb, var(--bad) 60%, transparent);
+  }
 }
 
 .exercise__footer {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.btn--sm {
+  min-height: 38px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
 }
 
 .solution {
-  margin-top: 0.85rem;
-  padding: 0.85rem 1rem;
-  border-radius: 14px;
-  background: rgba(95, 111, 94, 0.08);
+  margin-top: 0.7rem;
+  padding: 0.55rem 0 0;
+  border-top: 1px dashed rgba(201, 184, 168, 0.55);
+}
+
+.solution__answer {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  white-space: pre-line;
+  text-align: left;
 }
 
 .speak-target {
   font-family: var(--font-display);
   font-weight: 600;
-  margin-bottom: 0.65rem;
+  margin: 0 0 0.55rem;
+  text-align: left;
 }
 
 .speak-actions {
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.55rem;
 }
 
 .is-bad-text {

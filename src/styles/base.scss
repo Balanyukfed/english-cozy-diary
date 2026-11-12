@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(160, 140, 120, 0.35) transparent;
+}
+
 html,
 body,
 #app {
@@ -24,6 +29,35 @@ body {
     var(--paper);
   -webkit-font-smoothing: antialiased;
   overscroll-behavior-y: none;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(160, 140, 120, 0.32);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 120, 100, 0.48);
+}
+
+@media (pointer: coarse) {
+  *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  html {
+    scrollbar-width: none;
+  }
 }
 
 button,
@@ -77,6 +111,12 @@ p {
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
+  line-height: 1.2;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .btn--ghost {
@@ -92,12 +132,13 @@ p {
 
 .field {
   width: 100%;
-  min-height: 48px;
-  border-radius: 14px;
+  min-height: 46px;
+  border-radius: 12px;
   border: 1px solid rgba(201, 184, 168, 0.8);
   background: rgba(255, 255, 255, 0.45);
-  padding: 0.75rem 0.9rem;
+  padding: 0.7rem 0.85rem;
   outline: none;
+  text-align: left;
 }
 
 .field:focus {

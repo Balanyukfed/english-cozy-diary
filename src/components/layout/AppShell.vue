@@ -52,7 +52,7 @@ import StickerNav from './StickerNav.vue'
 @media (min-width: 900px) {
   .shell {
     display: grid;
-    grid-template-columns: 58px minmax(0, 1fr);
+    grid-template-columns: 112px minmax(0, 1fr);
     gap: 0;
     padding-bottom: 1.5rem;
     width: min(1100px, calc(100% - 2rem));

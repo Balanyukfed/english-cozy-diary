@@ -64,6 +64,18 @@ export function useAnswers(lessonId: string) {
     persist(lessonId)
   }
 
+  function hideSolution(exerciseId: string) {
+    const a = get(exerciseId)
+    a.revealed = false
+    persist(lessonId)
+  }
+
+  function toggleReveal(exerciseId: string) {
+    const a = get(exerciseId)
+    a.revealed = !a.revealed
+    persist(lessonId)
+  }
+
   function reset(exerciseId: string) {
     store.value[lessonId][exerciseId] = {
       value: null,
@@ -80,7 +92,7 @@ export function useAnswers(lessonId: string) {
     { deep: true },
   )
 
-  return { get, setValue, setResult, reveal, reset, store }
+  return { get, setValue, setResult, reveal, hideSolution, toggleReveal, reset, store }
 }
 
 export function normalizeAnswer(text: string): string {
