@@ -5,7 +5,22 @@ import { useData } from '@/composables/useData'
 import { usePageTurn } from '@/composables/usePageTurn'
 import { buildTeacherReport } from '@/composables/useAnswers'
 import LessonSheetView from '@/components/diary/LessonSheetView.vue'
-import type { Lesson } from '@/types'
+import type { Lesson, SheetType } from '@/types'
+
+type SectionTab = {
+  id: string
+  label: string
+  types: SheetType[]
+  index: number
+}
+
+const SECTION_DEFS: { id: string; label: string; types: SheetType[] }[] = [
+  { id: 'start', label: 'Старт', types: ['cover'] },
+  { id: 'review', label: 'Повтор', types: ['review'] },
+  { id: 'theory', label: 'Теория', types: ['explain'] },
+  { id: 'lesson', label: 'Урок', types: ['cold', 'practice', 'voice', 'test', 'vocab'] },
+  { id: 'hw', label: 'ДЗ', types: ['hw'] },
+]
 
 const route = useRoute()
 const router = useRouter()
@@ -28,6 +43,34 @@ const {
 } = usePageTurn(sheetsLen)
 const bookEl = ref<HTMLElement | null>(null)
 
+const sectionTabs = computed((): SectionTab[] => {
+  const sheets = current.value?.sheets ?? []
+  return SECTION_DEFS.map((def) => {
+    const index = sheets.findIndex((s) => def.types.includes(s.type))
+    return { ...def, index }
+  }).filter((t) => t.index >= 0)
+})
+
+const activeSectionId = computed(() => {
+  const type = current.value?.sheets[sheetIndex.value]?.type
+  if (!type) return ''
+  return SECTION_DEFS.find((d) => d.types.includes(type))?.id ?? ''
+})
+
+function jumpSection(tab: SectionTab) {
+  go(tab.index)
+  void router.replace({
+    query: { ...route.query, lesson: lessonId.value, tab: tab.id },
+  })
+}
+
+function applyTabQuery() {
+  const tabId = String(route.query.tab || '')
+  if (!tabId) return
+  const tab = sectionTabs.value.find((t) => t.id === tabId)
+  if (tab) go(tab.index)
+}
+
 onMounted(async () => {
   await loadCore()
   lessons.value = await listOpenLessons()
@@ -39,6 +82,7 @@ onMounted(async () => {
   if (lesson && !lessons.value.find((l) => l.id === lesson.id)) {
     lessons.value.push(lesson)
   }
+  applyTabQuery()
 })
 
 watch(bookEl, (el) => {
@@ -50,7 +94,23 @@ watch(bookEl, (el) => {
 watch(lessonId, async (id) => {
   go(0)
   await loadLesson(id)
-  router.replace({ query: { ...route.query, lesson: id } })
+  await router.replace({
+    query: {
+      lesson: id,
+      ...(route.query.tab ? { tab: String(route.query.tab) } : {}),
+    },
+  })
+  applyTabQuery()
+})
+
+watch(sheetIndex, (idx) => {
+  const type = current.value?.sheets[idx]?.type
+  if (!type) return
+  const tabId = SECTION_DEFS.find((d) => d.types.includes(type))?.id
+  if (!tabId || String(route.query.tab || '') === tabId) return
+  void router.replace({
+    query: { lesson: lessonId.value, tab: tabId },
+  })
 })
 
 const sheet = computed(() => current.value?.sheets[sheetIndex.value] ?? null)
@@ -103,6 +163,21 @@ async function copyTeacherReport() {
     <p v-if="current" class="diary__title">
       <strong>{{ current.id }}</strong> — {{ current.title }}
     </p>
+
+    <div v-if="sectionTabs.length" class="sections no-swipe" role="tablist" aria-label="Разделы урока">
+      <button
+        v-for="tab in sectionTabs"
+        :key="tab.id"
+        type="button"
+        role="tab"
+        class="sections__tab"
+        :class="{ 'is-active': activeSectionId === tab.id }"
+        :aria-selected="activeSectionId === tab.id"
+        @click="jumpSection(tab)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
 
     <div ref="bookEl" class="book">
       <Transition :name="direction === 'next' ? 'page-next' : 'page-prev'" mode="out-in">
@@ -180,7 +255,44 @@ async function copyTeacherReport() {
 }
 
 .diary__title {
+  margin-bottom: 0.55rem;
+}
+
+.sections {
+  display: flex;
+  gap: 0.3rem;
+  overflow-x: auto;
   margin-bottom: 0.75rem;
+  padding: 0.2rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(201, 184, 168, 0.55);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.sections__tab {
+  flex: 1 0 auto;
+  min-height: 38px;
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &.is-active {
+    background: rgba(255, 252, 245, 0.95);
+    color: var(--ink);
+    box-shadow: 0 1px 4px rgba(90, 70, 50, 0.1);
+  }
 }
 
 .book {
