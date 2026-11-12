@@ -1,0 +1,55 @@
+{
+  "cards": [
+    {
+      "id": "t1",
+      "title": "Порядок слов",
+      "formula": "КТО + ГЛАГОЛ + (ЧТО/КУДА)",
+      "examples": [
+        "I want a ticket.",
+        "She goes to the airport."
+      ],
+      "mistake": "Want I a ticket. / I ticket want."
+    },
+    {
+      "id": "t2",
+      "title": "he / she / it + -s",
+      "formula": "I/you/we/they → go, want · he/she/it → goes, wants",
+      "examples": [
+        "I go to Bangkok.",
+        "He goes to Bangkok."
+      ],
+      "mistake": "She go / He want"
+    },
+    {
+      "id": "t3",
+      "title": "to be: am / is / are",
+      "formula": "I am · he/she/it is · you/we/they are",
+      "examples": [
+        "I am at the airport.",
+        "They are ready."
+      ],
+      "mistake": "I is tired. / She are here."
+    },
+    {
+      "id": "t4",
+      "title": "Артикли: a / the / ∅",
+      "formula": "a = один считаемый · the = тот самый · страны/еда-категория без a",
+      "examples": [
+        "I want a ticket.",
+        "I go to the airport.",
+        "I like Thailand."
+      ],
+      "mistake": "a Thailand / a help / to airport"
+    },
+    {
+      "id": "t5",
+      "title": "have / has",
+      "formula": "I/you/we/they have · he/she/it has",
+      "examples": [
+        "We have a flight.",
+        "She has a passport."
+      ],
+      "mistake": "He have a ticket."
+    }
+  ]
+}

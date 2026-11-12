@@ -1,0 +1,76 @@
+{
+  "decks": [
+    {
+      "id": "deck0",
+      "title": "Вход — Урок 1",
+      "cards": [
+        {
+          "id": "v1",
+          "en": "I want a ticket",
+          "ru": "Я хочу билет",
+          "example": "I want a ticket to Bangkok."
+        },
+        {
+          "id": "v2",
+          "en": "She goes to the airport",
+          "ru": "Она едет в аэропорт",
+          "example": "She goes to the airport at 8.",
+          "warn": true
+        },
+        {
+          "id": "v3",
+          "en": "He wants help",
+          "ru": "Он хочет помощи",
+          "example": "He wants help with the bag.",
+          "warn": true
+        },
+        {
+          "id": "v4",
+          "en": "I like Thailand",
+          "ru": "Мне нравится Таиланд",
+          "example": "I like Thailand a lot.",
+          "warn": true
+        },
+        {
+          "id": "v5",
+          "en": "We have a flight",
+          "ru": "У нас есть рейс",
+          "example": "We have a flight at 10."
+        },
+        {
+          "id": "v6",
+          "en": "luggage",
+          "ru": "багаж",
+          "example": "They need luggage tags.",
+          "warn": true
+        },
+        {
+          "id": "v7",
+          "en": "beach",
+          "ru": "пляж",
+          "example": "She goes to the beach.",
+          "warn": true
+        },
+        {
+          "id": "v8",
+          "en": "some food",
+          "ru": "немного еды",
+          "example": "She wants some food."
+        },
+        {
+          "id": "v9",
+          "en": "to the airport",
+          "ru": "в аэропорт",
+          "example": "I go to the airport.",
+          "warn": true
+        },
+        {
+          "id": "v10",
+          "en": "passport",
+          "ru": "паспорт",
+          "example": "I need my passport."
+        }
+      ]
+    }
+  ]
+}

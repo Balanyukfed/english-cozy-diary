@@ -1,0 +1,55 @@
+{
+  "blocks": [
+    {
+      "id": "A",
+      "title": "Скелет предложения",
+      "lessons": [
+        { "id": "S1", "title": "Диагностика + порядок слов", "status": "current" },
+        { "id": "S2", "title": "to be: am / is / are", "status": "todo" },
+        { "id": "S3", "title": "to be: отрицание + вопросы", "status": "todo" },
+        { "id": "S4", "title": "want / need / have / like", "status": "todo" },
+        { "id": "S5", "title": "he/she + -s", "status": "todo" },
+        { "id": "S6", "title": "a / an / the / ∅", "status": "todo" },
+        { "id": "S7", "title": "There is / How much", "status": "todo" },
+        { "id": "S8", "title": "Предлоги in/on/at/to", "status": "todo" },
+        { "id": "S9", "title": "Контроль блока A", "status": "todo" }
+      ]
+    },
+    {
+      "id": "B",
+      "title": "Путешествие / быт",
+      "lessons": [
+        { "id": "S10", "title": "Аэропорт + паспорт", "status": "todo" },
+        { "id": "S11", "title": "Отель", "status": "todo" },
+        { "id": "S12", "title": "Еда: заказ и счёт", "status": "todo" },
+        { "id": "S13", "title": "Аллергии / уличная еда", "status": "todo" },
+        { "id": "S14", "title": "Grab / такси", "status": "todo" },
+        { "id": "S15", "title": "Магазин / торг", "status": "todo" },
+        { "id": "S16", "title": "Деньги / ATM", "status": "todo" },
+        { "id": "S17", "title": "Аптека", "status": "todo" },
+        { "id": "S18", "title": "Врач", "status": "todo" },
+        { "id": "S19", "title": "Past Simple минимум", "status": "todo" },
+        { "id": "S20", "title": "Жильё на месяц", "status": "todo" },
+        { "id": "S21", "title": "Контроль блока B", "status": "todo" }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "Автомат и комфорт",
+      "lessons": [
+        { "id": "S22", "title": "Can / Could", "status": "todo" },
+        { "id": "S23", "title": "Would like", "status": "todo" },
+        { "id": "S24", "title": "Going to", "status": "todo" },
+        { "id": "S25", "title": "Small talk", "status": "todo" },
+        { "id": "S26", "title": "Проблемы / help", "status": "todo" },
+        { "id": "S27", "title": "Сквозной день 1", "status": "todo" },
+        { "id": "S28", "title": "Сквозной день 2", "status": "todo" },
+        { "id": "S29", "title": "Сквозной день 3", "status": "todo" },
+        { "id": "S30", "title": "Проблемы: аптека/врач", "status": "todo" },
+        { "id": "S31", "title": "Упор по weak-spots", "status": "todo" },
+        { "id": "S32", "title": "Финальный тест: грамматика", "status": "todo" },
+        { "id": "S33", "title": "Финальный тест: говорение", "status": "todo" }
+      ]
+    }
+  ]
+}

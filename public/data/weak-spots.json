@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "id": "ws1",
+      "priority": "high",
+      "topic": "he / she / it + -s",
+      "why": "Частые ошибки: she go, he want",
+      "plan": "Повтор в каждом уроке блока A"
+    },
+    {
+      "id": "ws2",
+      "priority": "high",
+      "topic": "Артикли a / the / ∅",
+      "why": "a Thailand, a help, a food",
+      "plan": "Правило «можно посчитать?» + места с the"
+    },
+    {
+      "id": "ws3",
+      "priority": "medium",
+      "topic": "the + места",
+      "why": "to airport вместо to the airport",
+      "plan": "Фразы-якоря в тетради"
+    },
+    {
+      "id": "ws4",
+      "priority": "medium",
+      "topic": "Говорение вслух",
+      "why": "Главная цель спринта",
+      "plan": "Голосовые задания + диктовка с клавиатуры"
+    }
+  ]
+}
